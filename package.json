@@ -1,17 +1,16 @@
 {
-  "name": "divine-ui",
-  "private": true,
-  "version": "0.0.0",
+  "name": "divy-ui",
+  "version": "0.0.1",
   "type": "module",
   "files": [
     "dist"
   ],
-  "main": "./dist/divine-ui.umd.cjs",
-  "module": "./dist/divine-ui.js",
+  "main": "./dist/divy-ui.umd.cjs",
+  "module": "./dist/divy-ui.js",
   "exports": {
     ".": {
-      "import": "./dist/divine-ui.js",
-      "require": "./dist/divine-ui.umd.cjs"
+      "import": "./dist/divy-ui.js",
+      "require": "./dist/divy-ui.umd.cjs"
     }
   },
   "scripts": {

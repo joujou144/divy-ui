@@ -1,4 +1,4 @@
-import { Button } from "divine-ui";
+import { Button } from "divy-ui";
 
 function App() {
   return (
