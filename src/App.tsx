@@ -1,7 +1,12 @@
-import "./App.css";
+import { Button } from "divine-ui";
 
 function App() {
-  return <div>hello</div>;
+  return (
+    <div>
+      <p>hello</p>
+      <Button>Click me</Button>
+    </div>
+  );
 }
 
 export default App;
