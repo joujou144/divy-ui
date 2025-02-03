@@ -5,5 +5,7 @@ type ButtonProps = {
 };
 
 export function Button({ children }: ButtonProps): ReactNode {
-  return <button>{children}</button>;
+  return (
+    <button className="bg-pink-300 py-2 px-3 rounded-sm">{children}</button>
+  );
 }
