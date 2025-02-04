@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import cn from "classnames";
 
 type ButtonProps = {
   children: ReactNode;
@@ -7,6 +8,8 @@ type ButtonProps = {
 
 export function Button({ children, className }: ButtonProps): ReactNode {
   return (
-    <button className={`py-2 px-3 rounded-sm ${className}`}>{children}</button>
+    <button className={cn("py-2 px-3 rounded-sm bg-green-300", className)}>
+      {children}
+    </button>
   );
 }
