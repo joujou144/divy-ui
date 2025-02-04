@@ -28,6 +28,7 @@
     "dev": "vite",
     "prebuild": "rm -rf dist",
     "build": "tsc -p tsconfig.build.json && vite build",
+    "postbuild": "tsc -p tsconfig.build.json --emitDeclarationOnly",
     "lint": "eslint .",
     "preview": "vite preview",
     "prepublish": "npm run build",
