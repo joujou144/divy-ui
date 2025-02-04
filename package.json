@@ -1,28 +1,29 @@
 {
   "name": "divy-ui",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "type": "module",
   "types": "./dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*"
-      ]
-    }
-  },
-  "files": [
-    "dist"
-  ],
   "main": "./dist/divy-ui.umd.cjs",
   "module": "./dist/divy-ui.js",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/divy-ui.js",
       "require": "./dist/divy-ui.umd.cjs"
     },
     "./dist/divy-ui.css": "./dist/divy-ui.css"
   },
+  "files": [
+    "dist",
+    "dist/**/*.d.ts"
+  ],
   "sideEffects": false,
+  "keywords": [
+    "ui",
+    "react",
+    "components",
+    "typescript"
+  ],
   "scripts": {
     "dev": "vite",
     "prebuild": "rm -rf dist",
