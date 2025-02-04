@@ -1,6 +1,6 @@
 {
   "name": "divy-ui",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "files": [
     "dist"
@@ -11,8 +11,10 @@
     ".": {
       "import": "./dist/divy-ui.js",
       "require": "./dist/divy-ui.umd.cjs"
-    }
+    },
+    "./dist/divy-ui.css": "./dist/divy-ui.css"
   },
+  "sideEffects": false,
   "scripts": {
     "dev": "vite",
     "prebuild": "rm -rf dist",
