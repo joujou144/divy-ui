@@ -1,6 +1,6 @@
 {
   "name": "divy-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "types": "./dist/index.d.ts",
   "main": "./dist/divy-ui.umd.cjs",
@@ -36,7 +36,6 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.0.3",
     "classnames": "^2.5.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
