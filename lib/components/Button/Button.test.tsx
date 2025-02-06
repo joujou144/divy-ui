@@ -14,7 +14,7 @@ describe(`Component: ${Button.name}`, () => {
 
     expect(container.firstChild).toMatchInlineSnapshot(`
       <button
-        class="w-full focus:outline-none disabled:cursor-not-allowed transition-all duration-200 bg-purple-tint-200 text-gray-tint-600 border-none px-4 py-2 text-sm rounded-md hover:bg-opacity-80"
+        class="w-full focus:outline-none disabled:cursor-not-allowed transition-all duration-200 bg-purple-tint-200 text-gray-tint-600 font-medium border-none px-4 py-2 text-sm rounded-md hover:bg-opacity-80"
       >
         Test Button
       </button>
@@ -102,7 +102,9 @@ describe(`Component: ${Button.name}`, () => {
 
     // Check if loading spinner is present
     expect(container.querySelector("svg")).toBeInTheDocument();
-    expect(container.firstChild).toHaveClass("opacity-80");
+    expect(container.firstChild).toHaveClass(
+      "flex items-center justify-center gap-2.5 opacity-80"
+    );
     expect(container.firstChild).toBeDisabled();
   });
 
@@ -115,7 +117,7 @@ describe(`Component: ${Button.name}`, () => {
 
     expect(screen.getByTestId("test-icon")).toBeInTheDocument();
     expect(container.firstChild).toHaveClass(
-      "flex items-center justify-center gap-2"
+      "flex items-center justify-center gap-1.5 pr-5"
     );
   });
 

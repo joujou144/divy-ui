@@ -1,0 +1,1 @@
+export { FilledSendIcon } from "./FilledSendIcon";
