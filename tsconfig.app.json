@@ -9,8 +9,7 @@
     "baseUrl": ".",
     "paths": {
       "@/lib/*": ["./lib/*"], // For local development imports
-      "divy-ui": ["./lib"], // For external consumption
-      "divy-ui/*": ["./lib/*"] // For external consumption with specific import
+      "divy-ui": ["./lib"] // For external consumption
     },
 
     /* Bundler mode */
