@@ -7,82 +7,102 @@ export default {
   theme: {
     extend: {
       colors: {
-        base: {
-          DEFAULT: "#3A3A3A",
-          light: "#6D6D6D",
-          lighter: "#9E9E9E",
-          dark: "#0D0D0D",
+        gray: {
+          tint: {
+            100: "#F7F7F7",
+            200: "#E4E4E4",
+            300: "#D9D9D9",
+            400: "#9E9E9E",
+            500: "#6D6D6D",
+            600: "#3A3A3A", // default
+            700: "#0D0D0D",
+          },
         },
         blue: {
-          DEFAULT: "#256FF2",
-          light: "#E9F1FE",
-          lighter: "#F6F9FF",
+          tint: {
+            100: "#E9F1FE",
+            200: "#D3E2FC",
+            300: "#BED4FB",
+            400: "#A8C5FA",
+            500: "#92B7F9",
+            600: "#7CA9F7",
+            700: "#669AF6",
+            800: "#518CF5",
+            900: "#3B7DF3",
+          },
+          shade: {
+            100: "#2164DA",
+            200: "#1E59C2",
+            300: "#1A4EA9",
+            400: "#164391",
+            500: "#133879",
+            600: "#0F2C61",
+            700: "#0B2149",
+            800: "#071630",
+            900: "#040B18",
+          },
         },
         purple: {
-          DEFAULT: "#8E48E7",
-          light: "#EDDFF9",
-        },
-        green: {
-          DEFAULT: "#3AA03E",
-          light: "#DDF6DE",
-          dark: "#CCE9D8",
-        },
-        brown: {
-          DEFAULT: "#89652E",
-          light: "#FFEDD1",
-        },
-        teal: {
-          DEFAULT: "#1F8FA7",
-          light: "#D1F7FF",
-        },
-        gray: {
-          dark: "#3A3A3A",
-          DEFAULT: "#D9D9D9",
-          light: "#E4E4E4",
-          lighter: "#F7F7F7",
-        },
-        yellow: {
-          DEFAULT: "#FFC337",
-          dark: "#BB9B29",
-          light: "#F9F2DB",
+          tint: {
+            100: "#EDDFF9",
+            200: "#DAC6FB", // default
+          },
         },
         red: {
-          light: "#FFDDDD",
           DEFAULT: "#DE3C3C",
-          lighter: "#FCECEC",
-          dark: "#C83636",
-        },
-        mint: {
-          dark: "#3C7E56",
-          DEFAULT: "#56B57C",
-          light: "#88CBA3",
-        },
-        mustard: {
-          DEFAULT: "#DABD54",
-          light: "#F3D35E",
-        },
-        neutral: {
-          DEFAULT: "#6D6D6D",
-          light: "#E4E4E4",
-          lighter: "#F7F7F7",
-        },
-        incident: {
-          yellow: {
-            DEFAULT: "#FFEDCB",
-            dark: "#A77F32",
-            darker: "#785A21",
+          tint: {
+            100: "#FCECEC",
+            200: "#F8D8D8",
+            300: "#F5C5C5",
+            400: "#F2B1B1",
+            500: "#EF9E9E",
+            600: "#EB8A8A",
+            700: "#E87777",
+            800: "#E56363",
+            900: "#E15050",
           },
-          red: {
-            DEFAULT: "#FFDDD0",
-            dark: "#7A3C25",
+          shade: {
+            100: "#C83636",
+            200: "#B23030",
+            300: "#9B2A2A",
+            400: "#852424",
+            500: "#7A6A2F",
+            600: "#615426",
+            700: "#493F1C",
+            800: "#312A13",
+            900: "#181509",
           },
-          green: {
-            DEFAULT: "#DCFAE8",
-            dark: "#207040",
+        },
+        green: {
+          regular: "#029C54", // default
+          light: "#DCFAE8",
+          dark: "#207040",
+          tint: {
+            100: "#EEF8F2",
+            200: "#DDF0E5",
+            300: "#CCE9D8",
+            400: "#BBE1CB",
+            500: "#ABDABE",
+            600: "#9AD3B0",
+            700: "#89CBA3",
+            800: "#78C496",
+            900: "#67BC89",
           },
-          teal: {
-            DEFAULT: "#D1F5FA",
-            dark: "#165B63",
+          shade: {
+            100: "#4DA370",
+            200: "#459163",
+            300: "#3C7F57",
+            400: "#346D4A",
+            500: "#2B5B3E",
+            600: "#224832",
+            700: "#1A3625",
+            800: "#112419",
+            900: "#09120C",
+          },
+        },
+        orange: {
+          tint: {
+            300: "#FF6F4F", // default
           },
         },
       },

@@ -28,9 +28,10 @@ export default defineConfig({
     },
   },
   resolve: {
-    alias: {
-      "divy-ui": resolve(__dirname, "./lib"),
-    },
+    alias: [
+      { find: "@/lib", replacement: resolve(__dirname, "./lib") },
+      { find: "divy-ui", replacement: resolve(__dirname, "./lib") },
+    ],
   },
   test: {
     globals: true,

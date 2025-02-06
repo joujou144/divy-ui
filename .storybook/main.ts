@@ -16,9 +16,10 @@ const config: StorybookConfig = {
   viteFinal: async (config) => {
     return mergeConfig(config, {
       resolve: {
-        alias: {
-          "divy-ui": resolve(__dirname, "./lib"),
-        },
+        alias: [
+          { find: "@/lib", replacement: resolve(__dirname, "./lib") },
+          { find: "divy-ui", replacement: resolve(__dirname, "./lib") },
+        ],
       },
       // plugins: [tsconfigPaths()],
     });

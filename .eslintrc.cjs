@@ -10,7 +10,15 @@ module.exports = {
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
   plugins: ["react-refresh"],
+  settings: {
+    "import/resolver": {
+      typescript: {
+        project: "./tsconfig.json",
+      },
+    },
+  },
   rules: {
+    "import/no-unresolved": "error",
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },
