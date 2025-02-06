@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
-import { ComponentProps } from "react";
+import { ComponentProps, ReactNode } from "react";
 
 const buttonStyles = cva(
   [
@@ -20,7 +20,8 @@ const buttonStyles = cva(
       },
       variant: {
         solid: "border-none",
-        outline: "transition-colors border-[2px]",
+        outline: "border-[2px]",
+        ghost: "transition-colors",
       },
       size: {
         sm: "px-4 py-2 text-sm",
@@ -37,6 +38,10 @@ const buttonStyles = cva(
         true: "flex items-center justify-center gap-2 opacity-80",
         false: "",
       },
+      withIcon: {
+        true: "flex items-center justify-center gap-2",
+        false: "",
+      },
     },
     compoundVariants: [
       // solid hover state
@@ -44,30 +49,56 @@ const buttonStyles = cva(
         variant: "solid",
         className: "hover:bg-opacity-80",
       },
-      // outline hover states
+      // outline states
       {
         variant: "outline",
         color: "primary",
         className:
-          "bg-transparent border-gray-tint-500 hover:bg-stone-300 hover:text-white hover:border-stone-100",
+          "bg-transparent font-medium text-gray-tint-400 border-gray-tint-400 hover:bg-stone-300 hover:border-stone-100 hover:text-gray-tint-500",
       },
       {
         variant: "outline",
         color: "secondary",
         className:
-          "bg-transparent text-purple-300 border-purple-tint-200 hover:bg-purple-tint-200 hover:text-gray-tint-600",
+          "bg-transparent font-medium text-purple-300 border-purple-tint-200 hover:bg-purple-tint-200 hover:text-gray-tint-600",
       },
       {
         variant: "outline",
         color: "success",
         className:
-          "bg-transparent text-green-regular border-green-regular hover:bg-green-regular hover:text-stone-100",
+          "bg-transparent font-medium text-green-regular border-green-regular hover:bg-green-regular hover:text-stone-100",
       },
       {
         variant: "outline",
         color: "danger",
         className:
-          "bg-transparent text-orange-tint-300 border-orange-tint-300 hover:bg-orange-tint-300 hover:text-stone-100",
+          "bg-transparent font-medium text-orange-tint-300 border-orange-tint-300 hover:bg-orange-tint-300 hover:text-stone-100",
+      },
+
+      // ghost states
+      {
+        variant: "ghost",
+        color: "primary",
+        className:
+          "bg-transparent font-medium text-gray-tint-400 hover:bg-stone-300 hover:text-gray-tint-500",
+      },
+      {
+        variant: "ghost",
+        color: "secondary",
+        className:
+          "bg-transparent font-medium text-purple-300 hover:bg-purple-tint-200 hover:text-gray-tint-600",
+      },
+      {
+        variant: "ghost",
+        color: "success",
+        className:
+          "bg-transparent font-medium text-green-regular hover:bg-green-regular hover:text-stone-100",
+      },
+      {
+        variant: "ghost",
+        color: "danger",
+        className:
+          "bg-transparent font-medium text-orange-tint-300 hover:bg-orange-tint-300 hover:text-stone-100",
       },
     ],
     defaultVariants: {
@@ -83,25 +114,28 @@ const buttonStyles = cva(
 interface ButtonProps extends ComponentProps<"button"> {
   color?: "primary" | "secondary" | "success" | "danger";
   isLoading?: boolean;
+  icon?: ReactNode;
   size?: "sm" | "md" | "lg";
-  variant?: "solid" | "outline";
+  variant?: "solid" | "outline" | "ghost";
   radius?: "full" | "sm" | "md";
 }
 
 export function Button({
   children,
   className,
-  isLoading,
   color,
-  variant,
+  icon,
+  isLoading,
   radius,
+  variant,
   size,
   ...props
 }: ButtonProps) {
+  const withIcon = Boolean(icon);
   return (
     <button
       className={cn(
-        buttonStyles({ color, variant, size, radius, isLoading }),
+        buttonStyles({ color, variant, size, radius, isLoading, withIcon }),
         className
       )}
       disabled={isLoading}
@@ -129,10 +163,13 @@ export function Button({
               fill="currentColor"
             />
           </svg>
-          Loading
+          {children}
         </>
       ) : (
-        children
+        <>
+          {icon}
+          {children}
+        </>
       )}
     </button>
   );
