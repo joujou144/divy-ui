@@ -11,6 +11,8 @@
   },
   "include": ["lib/**/*"],
   "exclude": [
+    "public",
+    "types",
     "node_modules",
     "**/*.test.ts",
     "**/*.test.tsx",
