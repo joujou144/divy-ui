@@ -5,6 +5,7 @@ import { ComponentProps, forwardRef, ReactNode } from "react";
 const buttonStyles = cva(
   [
     "w-full",
+    "font-medium",
     "focus:outline-none",
     "disabled:cursor-not-allowed",
     "transition-all",
@@ -13,10 +14,10 @@ const buttonStyles = cva(
   {
     variants: {
       color: {
-        primary: ["bg-stone-200", "text-gray-tint-600  font-medium"],
-        secondary: ["bg-purple-tint-200", "text-gray-tint-600 font-medium"],
-        success: ["bg-green-regular", "text-stone-100 font-medium"],
-        danger: ["bg-orange-tint-300", "text-stone-100 font-medium"],
+        primary: ["bg-stone-200", "text-gray-tint-600"],
+        secondary: ["bg-purple-tint-200", "text-gray-tint-600"],
+        success: ["bg-green-regular", "text-stone-100"],
+        danger: ["bg-orange-tint-300", "text-stone-100"],
       },
       variant: {
         solid: "border-none",
