@@ -42,6 +42,6 @@ Lightweight and performant
 
 ### Documentation
 
-Full documentation and examples available on [GitHub repository]().
+Full documentation and examples available on [GitHub repository](https://github.com/joujou144/divy-ui).
 License
 MIT
