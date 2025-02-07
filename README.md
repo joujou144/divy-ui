@@ -2,14 +2,14 @@
 
 Sample React component library project built with TypeScript, Tailwind CSS, class-variance-authority and testing with Vitest/Jest.
 
-### Installation
+## Installation
 
 ```js
 npm install divy-ui
 
 ```
 
-### Usage
+## Usage
 
 1. Import the styles in your main application file:
 
@@ -27,7 +27,7 @@ function App() {
 }
 ```
 
-### Features
+## Features
 
 - Built with Tailwind CSS for modern, utility-first styling
 - Written in TypeScript for better type safety
@@ -35,7 +35,7 @@ function App() {
 - Storybook documentation for component exploration
 - Comprehensive test coverage with Vitest/Jest
 
-### Components
+## Components
 
 ### Available Components
 
@@ -47,7 +47,7 @@ function App() {
 - Card
 - Radio
 
-### Development
+## Development
 
 ### Prerequisites
 
@@ -56,7 +56,7 @@ Node.js >= 18;
 npm >= 9;
 ```
 
-### Setup
+## Setup
 
 1. Clone the repository
 
@@ -111,7 +111,7 @@ Scripts
 - `npm run storybook` - Start Storybook server
 - `npm run lint` - Run linting
 
-### Tech Stack
+## Tech Stack
 
 React
 TypeScript
@@ -122,6 +122,6 @@ tailwind-merge
 Storybook
 Vitest/Jest
 
-### Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
