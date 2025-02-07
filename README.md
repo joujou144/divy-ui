@@ -1,50 +1,127 @@
-# React + TypeScript + Vite
+## Divy UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sample React component library project built with TypeScript, Tailwind CSS, class-variance-authority and testing with Vitest/Jest.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
+### Installation
 
 ```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+npm install divy-ui
+
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Usage
+
+1. Import the styles in your main application file:
 
 ```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+import "divy-ui/styles.css";
 ```
+
+2. Import and use components:
+
+```js
+import { Button } from "divy-ui";
+
+function App() {
+  return <Button>Click me</Button>;
+}
+```
+
+### Features
+
+- Built with Tailwind CSS for modern, utility-first styling
+- Written in TypeScript for better type safety
+- Efficient styling with class-variance-authority and tailwind-merge
+- Storybook documentation for component exploration
+- Comprehensive test coverage with Vitest/Jest
+
+### Components
+
+### Available Components
+
+- Button
+- Input
+
+### Coming Soon
+
+- Card
+- Radio
+
+### Development
+
+### Prerequisites
+
+```js
+Node.js >= 18;
+npm >= 9;
+```
+
+### Setup
+
+1. Clone the repository
+
+```js
+git clone https://github.com/yourusername/divy-ui.git
+cd divy-ui
+
+```
+
+2. Install dependencies
+
+```js
+npm install
+
+```
+
+3. Create TypeScript build configuration
+   Create a `tsconfig.build.json` file in your project root:
+
+```js
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./dist",
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": false
+  },
+  "include": ["lib/**/*"],
+  "exclude": [
+    "public",
+    "types",
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.stories.tsx",
+    "./src/setupTests.ts"
+  ]
+}
+
+```
+
+This configuration ensures that only the component source files are included in the build, excluding test files, stories, and other development-only files.
+Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run test` - Run tests
+- `npm run storybook` - Start Storybook server
+- `npm run lint` - Run linting
+
+### Tech Stack
+
+React
+TypeScript
+Vite
+Tailwind CSS
+class-variance-authority
+tailwind-merge
+Storybook
+Vitest/Jest
+
+### Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
