@@ -1,4 +1,4 @@
-## Divy UI
+### Divy UI
 
 Sample React component library project built with TypeScript, Tailwind CSS, class-variance-authority and testing with Vitest/Jest.
 
@@ -113,14 +113,14 @@ Scripts
 
 ## Tech Stack
 
-React
-TypeScript
-Vite
-Tailwind CSS
-class-variance-authority
-tailwind-merge
-Storybook
-Vitest/Jest
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- class-variance-authority
+- tailwind-merge
+- Storybook
+- Vitest/Jest
 
 ## Contributing
 
