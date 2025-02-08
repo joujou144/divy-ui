@@ -24,7 +24,7 @@ const inputStyles = cva(
   {
     variants: {
       variant: {
-        flat: "bg-gray-100 hover:bg-gray-tint-200 hover:focus-within:bg-gray-100 focus:border-transparent hover:disabled:bg-gray-100 invalid:not(:focus)]:bg-pink-100",
+        flat: "bg-gray-100 hover:bg-gray-tint-200 hover:focus-within:bg-gray-100 focus:border-transparent hover:disabled:bg-gray-100",
         bordered:
           "bg-transparent ring-2 ring-gray-tint-200 focus-within:ring-gray-tint-500 hover:ring-gray-tint-400 hover:focus-within:ring-gray-tint-500 hover:disabled:ring-gray-tint-200 ",
       },
@@ -44,7 +44,6 @@ const inputStyles = cva(
 const labelStyles = cva([
   "absolute",
   "left-3",
-  "text-xs",
   "transition-all",
   "duration-150",
   "bg-transparent",
@@ -60,7 +59,7 @@ const labelStyles = cva([
 interface InputProps extends ComponentProps<"input"> {
   variant?: "flat" | "bordered";
   radius?: "sm" | "md" | "lg";
-  label?: string;
+  label: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -77,7 +76,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <label
             className={cn(
               labelStyles(),
-              props.placeholder ? "top-2" : "top-[1.25em] text-sm"
+              props.placeholder ? "top-2 text-xs" : "top-[1.25em] text-sm"
             )}
           >
             {label}
