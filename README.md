@@ -26,7 +26,7 @@ function App() {
   // Basic usage
   return <Button>Click me</Button>;
 
-  // The Button component comes with rich customization options:
+  // The Button component comes with customization options:
   return (
     <>
       {/* Different variants */}
