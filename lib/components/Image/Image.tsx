@@ -5,6 +5,7 @@ import { forwardRef, ImgHTMLAttributes, SyntheticEvent, useState } from "react";
 const containerStyles = cva("inline-block overflow-hidden", {
   variants: {
     radius: {
+      sm: "rounded-lg",
       md: "rounded-xl",
       lg: "rounded-2xl",
     },
@@ -31,7 +32,7 @@ const imageStyles = cva(
 
 export interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   isZoomed?: boolean;
-  radius?: "md" | "lg";
+  radius?: "sm" | "md" | "lg";
   width?: number | string;
   height?: number | string;
   fallbackSrc?: string;

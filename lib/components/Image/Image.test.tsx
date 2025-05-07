@@ -30,6 +30,20 @@ describe(`Component: ${Image.name}`, () => {
     expect(img.className).toMatch(/hover:scale-110/);
   });
 
+  it("applies rounded-lg class for sm radius", () => {
+    render(
+      <Image
+        alt="Rounded SM"
+        src="rounded.jpg"
+        radius="sm"
+        width={300}
+        height={200}
+      />
+    );
+    const wrapper = imgWrapper();
+    expect(wrapper.className).toContain("rounded-lg");
+  });
+
   it("applies rounded-xl class for md radius", () => {
     render(
       <Image
