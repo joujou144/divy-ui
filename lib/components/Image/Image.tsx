@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
-import { forwardRef, ImgHTMLAttributes } from "react";
+import { forwardRef, ImgHTMLAttributes, SyntheticEvent, useState } from "react";
 
 const containerStyles = cva("inline-block overflow-hidden", {
   variants: {
@@ -32,18 +32,52 @@ const imageStyles = cva(
 export interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   isZoomed?: boolean;
   radius?: "md" | "lg";
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
+  fallbackSrc?: string;
 }
 
 export const Image = forwardRef<HTMLImageElement, ImageProps>(
-  ({ className, isZoomed, radius, ...props }, ref) => {
+  (
+    {
+      className,
+      isZoomed,
+      radius,
+      width,
+      height,
+      fallbackSrc,
+      onError,
+      loading = "lazy",
+      ...props
+    },
+    ref
+  ) => {
+    const [src, setSrc] = useState(props.src);
+
+    const handleError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+      if (fallbackSrc && src !== fallbackSrc) {
+        setSrc(fallbackSrc);
+      }
+
+      if (onError) {
+        onError(e);
+      }
+    };
+
+    const sizeStyle = {
+      width: typeof width === "number" ? `${width}px` : width,
+      height: typeof height === "number" ? `${height}px` : height,
+    };
+
     return (
-      <div className={cn(containerStyles({ radius }))}>
+      <div className={cn(containerStyles({ radius }))} style={sizeStyle}>
         <img
           ref={ref}
           className={cn(imageStyles({ isZoomed }), className)}
+          loading={loading}
+          onError={handleError}
           {...props}
+          src={src}
         />
       </div>
     );

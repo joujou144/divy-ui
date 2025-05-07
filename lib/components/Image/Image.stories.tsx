@@ -12,7 +12,7 @@ type Story = StoryObj<typeof Image>;
 
 export const Default: Story = {
   args: {
-    src: "/images/speaker.jpg",
+    src: "/images/nike.jpg",
     alt: "Default Image",
     width: 300,
   },
@@ -24,15 +24,16 @@ export const Zoomed: Story = {
     alt: "Zoomed Image",
     isZoomed: true,
     width: 300,
+    height: 300,
   },
 };
 
-// export const Rounded: Story = {
-//   args: {
-//     src: "/images/neonpink-leaves.jpg",
-//     alt: "Rounded Image",
-//     isZoomed: true,
-//     width: 300,
-//     radius: "full",
-//   },
-// };
+export const WithFallback: Story = {
+  args: {
+    src: "/images/french-bulldog.png",
+    fallbackSrc: "/images/broken-image.svg",
+    alt: "Fallback demo",
+    width: 300,
+    height: 200,
+  },
+};
