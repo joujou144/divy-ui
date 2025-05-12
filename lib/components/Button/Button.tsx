@@ -178,7 +178,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         onClick={(e) => {
           createRipple(e);
-          props.onClick?.(e); // Call user’s onClick if provided
+          props.onClick?.(e);
         }}
         {...props}
       >
