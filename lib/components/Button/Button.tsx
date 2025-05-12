@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
-import { ComponentProps, forwardRef, ReactNode } from "react";
+import { ComponentProps, forwardRef, ReactNode, useRef } from "react";
 
 const buttonStyles = cva(
   [
@@ -136,15 +136,50 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const withIcon = Boolean(icon);
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+    const createRipple = (event: React.MouseEvent<HTMLButtonElement>) => {
+      const button = buttonRef.current;
+      if (!button) return;
+
+      const circle = document.createElement("span");
+      const diameter = Math.max(button.clientWidth, button.clientHeight);
+      const radius = diameter / 2;
+
+      circle.style.width = circle.style.height = `${diameter}px`;
+      circle.style.left = `${
+        event.clientX - button.getBoundingClientRect().left - radius
+      }px`;
+      circle.style.top = `${
+        event.clientY - button.getBoundingClientRect().top - radius
+      }px`;
+      circle.classList.add("ripple");
+
+      const ripple = button.getElementsByClassName("ripple")[0];
+      if (ripple) {
+        ripple.remove();
+      }
+
+      button.appendChild(circle);
+    };
 
     return (
       <button
-        ref={ref}
+        ref={(node) => {
+          buttonRef.current = node;
+          if (typeof ref === "function") ref(node);
+          else if (ref) ref.current = node;
+        }}
         disabled={isLoading}
         className={cn(
+          "relative overflow-hidden",
           buttonStyles({ color, variant, size, radius, isLoading, withIcon }),
           className
         )}
+        onClick={(e) => {
+          createRipple(e);
+          props.onClick?.(e); // Call user’s onClick if provided
+        }}
         {...props}
       >
         {isLoading ? (
