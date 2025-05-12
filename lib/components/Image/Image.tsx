@@ -16,7 +16,7 @@ const containerStyles = cva("inline-block overflow-hidden", {
 });
 
 const imageStyles = cva(
-  "object-cover w-full h-full transition-transform duration-300",
+  "block object-cover w-full h-full transition-transform duration-300",
   {
     variants: {
       isZoomed: {
