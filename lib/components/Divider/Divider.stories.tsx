@@ -13,20 +13,18 @@ type Story = StoryObj<typeof Divider>;
 export const Horizontal: Story = {
   args: {
     orientation: "horizontal",
-    className: "my-4",
   },
 };
 
 export const Vertical: Story = {
   args: {
     orientation: "vertical",
-    className: "h-6 mx-4",
   },
   render: (args) => (
     <div className="flex items-center text-sm">
-      <span>Item 1</span>
+      <span>Docs</span>
       <Divider {...args} />
-      <span>Item 2</span>
+      <span>Installation</span>
     </div>
   ),
 };

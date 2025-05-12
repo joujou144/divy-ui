@@ -5,8 +5,8 @@ import { ComponentProps, forwardRef } from "react";
 const dividerStyles = cva("shrink-0 bg-stone-300", {
   variants: {
     orientation: {
-      horizontal: "h-px w-full",
-      vertical: "w-px h-full",
+      horizontal: "h-px w-full my-4",
+      vertical: "w-px mx-4 h-6",
     },
   },
   defaultVariants: {

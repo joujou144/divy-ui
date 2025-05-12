@@ -1,22 +1,21 @@
 import { SVGProps } from "react";
 
-export const LinkIcon = (props: SVGProps<SVGSVGElement>) => {
+export const LinkIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
-    // class="w-6 h-6 text-gray-800 dark:text-white"
-    aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
+    width="13"
+    height="13"
     fill="currentColor"
-    viewBox="0 0 24 24"
+    viewBox="0 0 16 16"
     {...props}
   >
     <path
-      stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"
-    />
-  </svg>;
-};
+      fill-rule="evenodd"
+      d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+    />{" "}
+    <path
+      fill-rule="evenodd"
+      d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+    />{" "}
+  </svg>
+);

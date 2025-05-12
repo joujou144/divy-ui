@@ -1,4 +1,6 @@
 import { Button } from "@/lib/components/Button/Button";
+import { Divider } from "@/lib/components/Divider/Divider";
+import { LinkIcon } from "@/lib/components/icons";
 import { Image } from "@/lib/components/Image/Image";
 import { Meta, StoryObj } from "@storybook/react";
 import { Card, CardBody, CardFooter, CardHeader } from "./Card";
@@ -13,11 +15,15 @@ export default meta;
 export const Default: StoryObj<typeof Card> = {
   render: () => (
     <Card
-      className="max-w-[400px] p-4 border"
+      className="max-w-[400px] border"
       role="group"
       aria-label="User profile card"
     >
-      <CardHeader className="flex gap-3" role="heading" aria-level={2}>
+      <CardHeader
+        className="flex gap-3 px-4 pt-4"
+        role="heading"
+        aria-level={2}
+      >
         <Image
           alt="small-img"
           height={40}
@@ -27,13 +33,22 @@ export const Default: StoryObj<typeof Card> = {
         />
         <div className="flex flex-col">
           <p className="text-md">DivyUI</p>
-          <p className="text-sm text-gray-500">divy-ui.vercel.app</p>
+          <p className="text-sm text-stone-500">divy-ui.vercel.app</p>
         </div>
       </CardHeader>
-      <CardBody role="region" aria-label="Card content" className="pt-3">
-        <p>Make beautiful websites regardless of your design experience.</p>
+      <Divider />
+      <CardBody
+        role="region"
+        aria-label="Card content"
+        className="px-4 text-stone-400 font-light"
+      >
+        <p>Minimalist UI components to elevate your frontend workflow.</p>
       </CardBody>
-      <CardFooter role="contentinfo">Visit source code on GitHub.</CardFooter>
+      <Divider />
+      <CardFooter role="contentinfo" className="px-4 pb-4">
+        Visit source code on GitHub.
+        <LinkIcon />
+      </CardFooter>
     </Card>
   ),
 };
