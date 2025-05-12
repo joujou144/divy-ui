@@ -1,4 +1,4 @@
-import { LinkIcon } from "@/lib/components/icons";
+import { AttachmentIcon } from "@/lib/components/icons/AttachmentIcon";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Link } from "./Link";
 
@@ -41,6 +41,6 @@ export const WithCustomIcon: Story = {
     href: "https://github.com/joujou144/divy-ui",
     isExternal: true,
     showLinkIcon: true,
-    customIcon: <LinkIcon className="text-green-500" />,
+    customIcon: <AttachmentIcon />,
   },
 };
