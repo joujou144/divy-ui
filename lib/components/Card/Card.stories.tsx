@@ -1,7 +1,7 @@
 import { Button } from "@/lib/components/Button/Button";
 import { Divider } from "@/lib/components/Divider/Divider";
-import { LinkIcon } from "@/lib/components/icons";
 import { Image } from "@/lib/components/Image/Image";
+import { Link } from "@/lib/components/Link/Link";
 import { Meta, StoryObj } from "@storybook/react";
 import { Card, CardBody, CardFooter, CardHeader } from "./Card";
 
@@ -46,8 +46,13 @@ export const Default: StoryObj<typeof Card> = {
       </CardBody>
       <Divider />
       <CardFooter role="contentinfo" className="px-4 pb-4">
-        Visit source code on GitHub.
-        <LinkIcon />
+        <Link
+          isExternal
+          showLinkIcon
+          href="https://github.com/joujou144/divy-ui"
+        >
+          Visit source code on GitHub.
+        </Link>
       </CardFooter>
     </Card>
   ),
