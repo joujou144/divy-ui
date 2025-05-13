@@ -1,6 +1,6 @@
 import { Button } from "@/lib/components/Button/Button";
+import { useDisclosure } from "@/lib/components/Modal/useDisclosure";
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
 import {
   Modal,
   ModalBody,
@@ -33,28 +33,33 @@ const meta: Meta<typeof Modal> = {
 export default meta;
 type Story = StoryObj<typeof Modal>;
 
-const ModalExample = (args: any) => {
-  const [isOpen, setIsOpen] = useState(true);
+const ModalExample = () => {
+  const { isOpen, onOpenModal, handleOpenChange } = useDisclosure();
 
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
+      <Button onClick={onOpenModal}>Open Modal</Button>
 
-      <Modal {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <ModalContent onClose={() => setIsOpen(false)}>
-          <ModalTitle className="text-xl">Example Modal</ModalTitle>
-          <ModalBody className="text-sm">
-            <p>
-              This is a sample modal. You can test different sizes, backdrop
-              styles, and dismiss behaviors using Storybook controls.
-            </p>
-          </ModalBody>
-          <ModalFooter className="flex justify-between items-center gap-2">
-            <Button variant="outline" onClick={() => setIsOpen(false)}>
-              Cancel
-            </Button>
-            <Button onClick={() => setIsOpen(false)}>Confirm</Button>
-          </ModalFooter>
+      <Modal isOpen={isOpen} handleOpenChange={handleOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalTitle>Example Modal</ModalTitle>
+              <ModalBody>
+                One morning, when Gregor Samsa woke from troubled dreams, he
+                found himself transformed in his bed into a horrible vermin. He
+                lay on his armour-like back, and if he lifted his head a little
+                he could see his brown belly, slightly domed and divided by
+                arches into stiff sections.
+              </ModalBody>
+              <ModalFooter className="flex justify-between gap-4 items-center">
+                <Button variant="outline" onClick={onClose}>
+                  Cancel
+                </Button>
+                <Button>Confirm</Button>
+              </ModalFooter>
+            </>
+          )}
         </ModalContent>
       </Modal>
     </>

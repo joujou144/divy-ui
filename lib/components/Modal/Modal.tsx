@@ -4,8 +4,12 @@ import {
   ComponentProps,
   KeyboardEvent,
   MouseEvent,
+  ReactElement,
   ReactNode,
+  cloneElement,
   forwardRef,
+  isValidElement,
+  useCallback,
   useEffect,
   useRef,
 } from "react";
@@ -26,12 +30,12 @@ const modalSizes = cva("max-w-full w-full h-auto rounded-xl border-none p-0", {
 
 interface ModalProps extends ComponentProps<"dialog"> {
   children: ReactNode;
-  isOpen: boolean;
-  onClose: () => void;
   size?: "xs" | "sm" | "md" | "lg";
   backdrop?: "darken" | "blur";
   isDismissable?: boolean;
   isKeyboardDismissDisabled?: boolean;
+  isOpen: boolean;
+  handleOpenChange: (open: boolean) => void;
   ariaLabel?: string;
 }
 
@@ -40,7 +44,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     {
       children,
       isOpen,
-      onClose,
+      handleOpenChange,
       size,
       className,
       backdrop = "darken",
@@ -59,11 +63,15 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       if (!dialog) return;
 
       if (isOpen) {
-        if (!dialog.open) dialog.showModal();
+        dialog.showModal();
       } else {
         dialog.close();
       }
-    }, [isOpen, modalRef]);
+    }, [isOpen]);
+
+    const handleClose = useCallback(() => {
+      handleOpenChange(false);
+    }, [handleOpenChange]);
 
     const handleClickOutside = (e: MouseEvent<HTMLDialogElement>) => {
       const dialog = modalRef.current;
@@ -77,7 +85,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         e.clientY <= rect.bottom;
 
       if (!isClickInside) {
-        onClose?.();
+        handleClose();
       }
     };
 
@@ -88,7 +96,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       }
 
       if (e.key === "Escape" && isDismissable) {
-        onClose?.();
+        handleClose();
       }
     };
 
@@ -102,7 +110,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         role="dialog"
         className={cn(
           modalSizes({ size }),
-          "z-50 ",
+          "z-40",
           backdrop === "blur"
             ? "backdrop:bg-black/30 backdrop:backdrop-blur-sm"
             : "backdrop:bg-black/50",
@@ -111,15 +119,20 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         )}
         {...props}
       >
-        {/* <button
-          onClick={onClose}
-          className="absolute right-4 top-4 text-lg w-1/2"
-          aria-label="Close modal"
-        >
-          ×
-        </button> */}
-
-        {children}
+        <div className="relative w-full h-full">
+          <button
+            onClick={handleClose}
+            className="absolute cursor-pointer z-50 right-1.5 top-1.5 w-7 h-7 text-xl rounded-full hover:bg-gray-200 transition-all duration-200 focus:outline-none"
+            aria-label="Close modal"
+          >
+            ×
+          </button>
+          {isValidElement(children) && children.type === ModalContent
+            ? cloneElement(children as ReactElement<ModalContentProps>, {
+                onClose: handleClose,
+              })
+            : children}
+        </div>
       </dialog>
     );
   }
@@ -127,26 +140,19 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
 
 Modal.displayName = "Modal";
 
+type ModalContentProps = {
+  className?: string;
+  onClose?: () => void;
+  children: ReactNode | ((onClose: () => void) => ReactNode);
+};
+
 export const ModalContent = ({
   className,
   children,
   onClose,
-}: {
-  className?: string;
-  children: ReactNode;
-  onClose?: () => void;
-}) => (
-  <div className={cn("relative w-full py-6 px-5", className)}>
-    {onClose && (
-      <button
-        onClick={onClose}
-        className="absolute top-1.5 right-1.5 h-8 w-8 text-lg rounded-full transition-all duration-200 hover:bg-gray-100"
-        aria-label="Close modal"
-      >
-        x
-      </button>
-    )}
-    {children}
+}: ModalContentProps) => (
+  <div className={cn("w-full py-6 px-5", className)}>
+    {typeof children === "function" ? children(onClose!) : children}
   </div>
 );
 

@@ -7,6 +7,9 @@ export function useDisclosure(initialState = false) {
   const handleOpenChange = useCallback((open: boolean) => {
     setIsOpen(open);
   }, []);
+  // const handleOpenChange = useCallback(() => {
+  //   setIsOpen(false);
+  // }, []);
 
   return { isOpen, onOpenModal, handleOpenChange };
 }
