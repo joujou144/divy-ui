@@ -42,14 +42,14 @@ const ModalExample = (args: any) => {
 
       <Modal {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <ModalContent onClose={() => setIsOpen(false)}>
-          <ModalTitle>Example Modal</ModalTitle>
-          <ModalBody>
+          <ModalTitle className="text-xl">Example Modal</ModalTitle>
+          <ModalBody className="text-sm">
             <p>
               This is a sample modal. You can test different sizes, backdrop
               styles, and dismiss behaviors using Storybook controls.
             </p>
           </ModalBody>
-          <ModalFooter>
+          <ModalFooter className="flex justify-between items-center gap-2">
             <Button variant="outline" onClick={() => setIsOpen(false)}>
               Cancel
             </Button>

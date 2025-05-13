@@ -102,7 +102,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         role="dialog"
         className={cn(
           modalSizes({ size }),
-          "z-50",
+          "z-50 ",
           backdrop === "blur"
             ? "backdrop:bg-black/30 backdrop:backdrop-blur-sm"
             : "backdrop:bg-black/50",
@@ -111,6 +111,14 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         )}
         {...props}
       >
+        {/* <button
+          onClick={onClose}
+          className="absolute right-4 top-4 text-lg w-1/2"
+          aria-label="Close modal"
+        >
+          ×
+        </button> */}
+
         {children}
       </dialog>
     );
@@ -128,14 +136,14 @@ export const ModalContent = ({
   children: ReactNode;
   onClose?: () => void;
 }) => (
-  <div className={cn("relative flex flex-col gap-4 p-6 w-full", className)}>
+  <div className={cn("relative w-full py-6 px-5", className)}>
     {onClose && (
       <button
         onClick={onClose}
-        className="absolute right-4 top-4 text-lg"
+        className="absolute top-1.5 right-1.5 h-8 w-8 text-lg rounded-full transition-all duration-200 hover:bg-gray-100"
         aria-label="Close modal"
       >
-        ×
+        x
       </button>
     )}
     {children}
@@ -146,23 +154,15 @@ export const ModalTitle = ({ className, ...props }: ComponentProps<"h2">) => (
   <h2
     role="heading"
     aria-level={2}
-    className={cn("text-xl font-semibold", className)}
+    className={cn("font-semibold", className)}
     {...props}
   />
 );
 
 export const ModalBody = ({ className, ...props }: ComponentProps<"div">) => (
-  <div
-    role="document"
-    className={cn("text-sm text-gray-700", className)}
-    {...props}
-  />
+  <div role="document" className={cn("pt-6", className)} {...props} />
 );
 
 export const ModalFooter = ({ className, ...props }: ComponentProps<"div">) => (
-  <div
-    role="contentinfo"
-    className={cn("flex justify-end gap-2 pt-4", className)}
-    {...props}
-  />
+  <div role="contentinfo" className={cn("pt-6", className)} {...props} />
 );

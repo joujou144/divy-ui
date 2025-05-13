@@ -20,9 +20,10 @@ const buttonStyles = cva(
         danger: ["bg-orange-tint-300", "text-stone-100"],
       },
       variant: {
-        solid: "border-none",
-        outline: "border-[2px]",
-        ghost: "transition-colors",
+        solid: "border-[2px] border-purple-tint-200",
+        outline: "border-[2px] bg-transparent",
+        ghost:
+          "border-[2px] border-transparent bg-transparent transition-colors",
       },
       size: {
         sm: "px-4 py-2 text-sm",
@@ -47,32 +48,32 @@ const buttonStyles = cva(
       // solid hover state
       {
         variant: "solid",
-        className: "hover:bg-opacity-80",
+        className: "hover:bg-opacity-80 hover:border-transparent",
       },
       // outline states
       {
         variant: "outline",
         color: "primary",
         className:
-          "bg-transparent font-medium text-gray-tint-400 border-gray-tint-400 hover:bg-stone-300 hover:border-stone-100 hover:text-gray-tint-500",
+          "font-medium text-gray-tint-400 border-gray-tint-400 hover:bg-stone-300 hover:border-stone-100 hover:text-gray-tint-500",
       },
       {
         variant: "outline",
         color: "secondary",
         className:
-          "bg-transparent text-purple-300 border-purple-tint-200 hover:bg-purple-tint-200 hover:text-gray-tint-600",
+          "text-purple-300 border-purple-tint-200 hover:bg-purple-tint-200 hover:text-gray-tint-600",
       },
       {
         variant: "outline",
         color: "success",
         className:
-          "bg-transparent text-green-regular border-green-regular hover:bg-green-regular hover:text-stone-100",
+          "text-green-regular border-green-regular hover:bg-green-regular hover:text-stone-100",
       },
       {
         variant: "outline",
         color: "danger",
         className:
-          "bg-transparent text-orange-tint-300 border-orange-tint-300 hover:bg-orange-tint-300 hover:text-stone-100",
+          "text-orange-tint-300 border-orange-tint-300 hover:bg-orange-tint-300 hover:text-stone-100",
       },
 
       // ghost states
@@ -80,25 +81,25 @@ const buttonStyles = cva(
         variant: "ghost",
         color: "primary",
         className:
-          "bg-transparent text-gray-tint-400 hover:bg-stone-300 hover:text-gray-tint-500",
+          "text-gray-tint-400 hover:bg-stone-300 hover:border-stone-200 hover:text-gray-tint-500",
       },
       {
         variant: "ghost",
         color: "secondary",
         className:
-          "bg-transparent text-purple-300 hover:bg-purple-tint-200 hover:text-gray-tint-600",
+          "text-purple-300 hover:bg-purple-tint-200 hover:text-gray-tint-600",
       },
       {
         variant: "ghost",
         color: "success",
         className:
-          "bg-transparent text-green-regular hover:bg-green-regular hover:text-stone-100",
+          "text-green-regular hover:bg-green-regular hover:text-stone-100",
       },
       {
         variant: "ghost",
         color: "danger",
         className:
-          "bg-transparent font-medium text-orange-tint-300 hover:bg-orange-tint-300 hover:text-stone-100",
+          "font-medium text-orange-tint-300 hover:bg-orange-tint-300 hover:text-stone-100",
       },
     ],
     defaultVariants: {
