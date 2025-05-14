@@ -9,5 +9,4 @@ export * from "./components/Input/Input";
 export * from "./components/Link/Link";
 export * from "./components/Modal";
 export * from "./components/Progress/Progress";
-export * from "./components/Text/Text";
 export * from "./utils";

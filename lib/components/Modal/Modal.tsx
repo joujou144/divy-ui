@@ -14,23 +14,31 @@ import {
   useRef,
 } from "react";
 
-const modalSizes = cva("max-w-full w-full h-auto rounded-xl border-none p-0", {
-  variants: {
-    size: {
-      xs: "w-[200px] h-[400px]",
-      sm: "w-[300px] h-[300px]",
-      md: "w-[400px] h-[auto]",
-      lg: "w-[500px] h-[auto]",
+const modalStyles = cva(
+  "max-w-full w-full h-auto rounded-xl border-none py-5 shadow-lg",
+  {
+    variants: {
+      size: {
+        xs: "w-[345px] h-[590px]",
+        sm: "w-[400px] h-[510px]",
+        md: "w-[460px] h-[490px]",
+        lg: "w-[550px] h-[420px]",
+        xl: "max-w-[670px] h-[390px]",
+      },
+      backdrop: {
+        darken: "backdrop:bg-black/50",
+        blur: "backdrop:bg-black/30 backdrop:backdrop-blur-sm",
+      },
     },
-  },
-  defaultVariants: {
-    size: "md",
-  },
-});
-
-interface ModalProps extends ComponentProps<"dialog"> {
+    defaultVariants: {
+      size: "md",
+      backdrop: "darken",
+    },
+  }
+);
+export interface ModalProps extends ComponentProps<"dialog"> {
   children: ReactNode;
-  size?: "xs" | "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
   backdrop?: "darken" | "blur";
   isDismissable?: boolean;
   isKeyboardDismissDisabled?: boolean;
@@ -47,7 +55,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       handleOpenChange,
       size,
       className,
-      backdrop = "darken",
+      backdrop,
       isDismissable = true,
       isKeyboardDismissDisabled = false,
       ariaLabel,
@@ -109,30 +117,27 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         aria-label={ariaLabel}
         role="dialog"
         className={cn(
-          modalSizes({ size }),
-          "z-40",
-          backdrop === "blur"
-            ? "backdrop:bg-black/30 backdrop:backdrop-blur-sm"
-            : "backdrop:bg-black/50",
-          "overflow-hidden",
+          "z-40 overflow-auto",
+          isOpen ? "animate-modalOpen" : "animate-modalClose",
+          modalStyles({ size, backdrop }),
           className
         )}
         {...props}
       >
-        <div className="relative w-full h-full">
+        <div className="relative">
           <button
             onClick={handleClose}
-            className="absolute cursor-pointer z-50 right-1.5 top-1.5 w-7 h-7 text-xl rounded-full hover:bg-gray-200 transition-all duration-200 focus:outline-none"
+            className="absolute cursor-pointer z-50 right-1.5 -top-3.5 w-7 h-7 text-xl font-light rounded-full text-gray-500 hover:bg-stone-100 transition-all duration-200 focus:outline-none"
             aria-label="Close modal"
           >
             ×
           </button>
-          {isValidElement(children) && children.type === ModalContent
-            ? cloneElement(children as ReactElement<ModalContentProps>, {
-                onClose: handleClose,
-              })
-            : children}
         </div>
+        {isValidElement(children) && children.type === ModalContent
+          ? cloneElement(children as ReactElement<ModalContentProps>, {
+              onClose: handleClose,
+            })
+          : children}
       </dialog>
     );
   }
@@ -151,7 +156,9 @@ export const ModalContent = ({
   children,
   onClose,
 }: ModalContentProps) => (
-  <div className={cn("w-full py-6 px-5", className)}>
+  <div
+    className={cn("w-[92%] h-full px-2 mx-auto overflow-y-scroll", className)}
+  >
     {typeof children === "function" ? children(onClose!) : children}
   </div>
 );

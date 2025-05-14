@@ -6,6 +6,7 @@ import {
   ModalBody,
   ModalContent,
   ModalFooter,
+  ModalProps,
   ModalTitle,
 } from "./Modal";
 
@@ -15,7 +16,7 @@ const meta: Meta<typeof Modal> = {
   argTypes: {
     size: {
       control: { type: "select" },
-      options: ["xs", "sm", "md", "lg"],
+      options: ["xs", "sm", "md", "lg", "xl"],
     },
     backdrop: {
       control: { type: "select" },
@@ -33,26 +34,44 @@ const meta: Meta<typeof Modal> = {
 export default meta;
 type Story = StoryObj<typeof Modal>;
 
-const ModalExample = () => {
+const ModalExample = (args: ModalProps) => {
   const { isOpen, onOpenModal, handleOpenChange } = useDisclosure();
 
   return (
     <>
       <Button onClick={onOpenModal}>Open Modal</Button>
 
-      <Modal isOpen={isOpen} handleOpenChange={handleOpenChange}>
-        <ModalContent>
+      <Modal
+        {...args}
+        isOpen={isOpen}
+        handleOpenChange={handleOpenChange}
+        className=""
+      >
+        <ModalContent className="flex flex-col justify-end">
           {(onClose) => (
             <>
               <ModalTitle>Example Modal</ModalTitle>
-              <ModalBody>
-                One morning, when Gregor Samsa woke from troubled dreams, he
-                found himself transformed in his bed into a horrible vermin. He
-                lay on his armour-like back, and if he lifted his head a little
-                he could see his brown belly, slightly domed and divided by
-                arches into stiff sections.
+              <ModalBody className="flex flex-col gap-2 font-light tracking-wide">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Nullam pulvinar risus non risus hendrerit venenatis.
+                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
+                </p>
+
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Nullam pulvinar risus non risus hendrerit venenatis.
+                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
+                </p>
+
+                <p>
+                  Magna exercitation reprehenderit magna aute tempor cupidatat
+                  consequat elit dolor adipisicing. Mollit dolor eiusmod sunt ex
+                  incididunt cillum quis. Velit duis sit officia eiusmod Lorem
+                  aliqua enim laboris do dolor eiusmod.
+                </p>
               </ModalBody>
-              <ModalFooter className="flex justify-between gap-4 items-center">
+              <ModalFooter className="flex justify-between gap-5">
                 <Button variant="outline" onClick={onClose}>
                   Cancel
                 </Button>
