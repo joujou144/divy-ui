@@ -96,8 +96,18 @@ export default {
       animation: {
         fadeIn: "fadeIn 300ms ease-in-out",
         fadeOut: "fadeOut 300ms ease-in-out",
+        modalOpen: "modalOpen 300ms ease-out forwards",
+        modalClose: "modalClose 300ms ease-in forwards",
       },
       keyframes: {
+        modalOpen: {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        modalClose: {
+          from: { opacity: "1" },
+          to: { opacity: "0" },
+        },
         fadeIn: {
           "0%": {
             opacity: 0,

@@ -1,17 +1,19 @@
 import { Button } from "@/lib/components/Button/Button";
+import { createRipple } from "@/lib/components/Button/createRipple";
 import { useDisclosure } from "@/lib/components/Modal/useDisclosure";
 import type { Meta, StoryObj } from "@storybook/react";
+import { useRef } from "react";
 import {
-  Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalProps,
   ModalTitle,
-} from "./Modal";
+  NewModal,
+} from "./NewModal";
 
-const meta: Meta<typeof Modal> = {
-  component: Modal,
+const meta: Meta<typeof NewModal> = {
+  component: NewModal,
   tags: ["autodocs"],
   argTypes: {
     size: {
@@ -32,18 +34,43 @@ const meta: Meta<typeof Modal> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Modal>;
+type Story = StoryObj<typeof NewModal>;
 
 const ModalExample = (args: ModalProps) => {
   const { isOpen, onOpenModal, handleOpenChange } = useDisclosure();
+  const testButtonRef = useRef<HTMLButtonElement | null>(null);
 
   return (
     <>
-      <Button onClick={onOpenModal} className="absolute top-2 left-2 w-30">
+      <Button
+        color="success"
+        onClick={() => {
+          console.log("open");
+
+          //   setTimeout(() => {
+          //     onOpenModal();
+          //   }, 75); // 5
+          onOpenModal();
+        }}
+        className="w-30"
+      >
         Open Modal
       </Button>
 
-      <Modal
+      <Button
+        ref={testButtonRef}
+        onClick={(e) => {
+          console.log("clicked");
+          if (testButtonRef.current) {
+            createRipple(e, testButtonRef.current);
+          }
+        }}
+        className="w-30"
+      >
+        Test ripple
+      </Button>
+
+      <NewModal
         {...args}
         isOpen={isOpen}
         handleOpenChange={handleOpenChange}
@@ -82,7 +109,7 @@ const ModalExample = (args: ModalProps) => {
             </>
           )}
         </ModalContent>
-      </Modal>
+      </NewModal>
     </>
   );
 };

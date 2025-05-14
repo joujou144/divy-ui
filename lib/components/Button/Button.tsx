@@ -1,3 +1,4 @@
+import { createRipple } from "@/lib/components/Button/createRipple";
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 import { ComponentProps, forwardRef, ReactNode, useRef } from "react";
@@ -14,13 +15,16 @@ const buttonStyles = cva(
   {
     variants: {
       color: {
-        primary: ["bg-stone-200", "text-gray-tint-600"],
-        secondary: ["bg-purple-tint-200", "text-gray-tint-600"],
-        success: ["bg-green-regular", "text-stone-100"],
-        danger: ["bg-orange-tint-300", "text-stone-100"],
+        primary: ["bg-stone-200", "text-gray-tint-600 border-stone-200"],
+        secondary: [
+          "bg-purple-tint-200",
+          "text-gray-tint-600 border-purple-tint-200",
+        ],
+        success: ["bg-green-regular", "text-stone-100 border-green-regular"],
+        danger: ["bg-orange-tint-300", "text-stone-100 border-orange-tint-300"],
       },
       variant: {
-        solid: "border-[2px] border-purple-tint-200",
+        solid: "border-[2px]",
         outline: "border-[2px] bg-transparent",
         ghost:
           "border-[2px] border-transparent bg-transparent transition-colors",
@@ -139,30 +143,30 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const withIcon = Boolean(icon);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-    const createRipple = (event: React.MouseEvent<HTMLButtonElement>) => {
-      const button = buttonRef.current;
-      if (!button) return;
+    // const createRipple = (event: React.MouseEvent<HTMLButtonElement>) => {
+    //   const button = buttonRef.current;
+    //   if (!button) return;
 
-      const circle = document.createElement("span");
-      const diameter = Math.max(button.clientWidth, button.clientHeight);
-      const radius = diameter / 2;
+    //   const circle = document.createElement("span");
+    //   const diameter = Math.max(button.clientWidth, button.clientHeight);
+    //   const radius = diameter / 2;
 
-      circle.style.width = circle.style.height = `${diameter}px`;
-      circle.style.left = `${
-        event.clientX - button.getBoundingClientRect().left - radius
-      }px`;
-      circle.style.top = `${
-        event.clientY - button.getBoundingClientRect().top - radius
-      }px`;
-      circle.classList.add("ripple");
+    //   circle.style.width = circle.style.height = `${diameter}px`;
+    //   circle.style.left = `${
+    //     event.clientX - button.getBoundingClientRect().left - radius
+    //   }px`;
+    //   circle.style.top = `${
+    //     event.clientY - button.getBoundingClientRect().top - radius
+    //   }px`;
+    //   circle.classList.add("ripple");
 
-      const ripple = button.getElementsByClassName("ripple")[0];
-      if (ripple) {
-        ripple.remove();
-      }
+    //   const ripple = button.getElementsByClassName("ripple")[0];
+    //   if (ripple) {
+    //     ripple.remove();
+    //   }
 
-      button.appendChild(circle);
-    };
+    //   button.appendChild(circle);
+    // };
 
     return (
       <button
@@ -178,8 +182,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           className
         )}
         onClick={(e) => {
-          createRipple(e);
-          props.onClick?.(e);
+          if (buttonRef.current) {
+            createRipple(e, buttonRef.current);
+          }
+          setTimeout(() => {
+            props.onClick?.(e);
+          }, 100);
         }}
         {...props}
       >

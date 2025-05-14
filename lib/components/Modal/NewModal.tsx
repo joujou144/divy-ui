@@ -2,21 +2,18 @@ import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 import {
   ComponentProps,
-  KeyboardEvent,
-  MouseEvent,
   ReactElement,
   ReactNode,
   cloneElement,
   forwardRef,
   isValidElement,
-  useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
 
 const modalStyles = cva(
-  "max-w-full w-full h-auto rounded-xl border-none py-5 shadow-lg transition-all",
+  "relative max-w-full w-full h-auto rounded-xl py-5 shadow-lg transition-all bg-white",
   {
     variants: {
       size: {
@@ -26,18 +23,26 @@ const modalStyles = cva(
         lg: "w-[550px] h-[420px]",
         xl: "max-w-[670px] h-[390px]",
       },
-      backdrop: {
-        darken: "backdrop:bg-black/50 duration-300",
-        blur: "backdrop:bg-black/30 backdrop:backdrop-blur-sm duration-300",
-      },
     },
     defaultVariants: {
       size: "md",
-      backdrop: "darken",
     },
   }
 );
-export interface ModalProps extends ComponentProps<"dialog"> {
+
+const backdropStyles = cva("duration-300", {
+  variants: {
+    backdrop: {
+      darken: "bg-black/30",
+      blur: "bg-black/20 backdrop-blur-sm",
+    },
+  },
+  defaultVariants: {
+    backdrop: "darken",
+  },
+});
+
+export interface ModalProps extends ComponentProps<"div"> {
   children: ReactNode;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   backdrop?: "darken" | "blur";
@@ -48,7 +53,7 @@ export interface ModalProps extends ComponentProps<"dialog"> {
   ariaLabel?: string;
 }
 
-export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
+export const NewModal = forwardRef<HTMLDivElement, ModalProps>(
   (
     {
       children,
@@ -64,36 +69,27 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     },
     ref
   ) => {
-    const localRef = useRef<HTMLDialogElement>(null);
-    const modalRef = (ref as React.RefObject<HTMLDialogElement>) ?? localRef;
+    const localRef = useRef<HTMLDivElement>(null);
+    const modalRef = (ref as React.RefObject<HTMLDivElement>) ?? localRef;
     const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 
     useEffect(() => {
-      const dialog = modalRef.current;
-      if (!dialog) return;
-
       if (isOpen) {
-        if (!dialog.open) {
-          dialog.showModal();
-        }
         setIsAnimatingOut(false);
-      } else if (dialog.open) {
+      } else {
         setIsAnimatingOut(true);
-
         const timeoutId = setTimeout(() => {
-          dialog.close();
           setIsAnimatingOut(false);
         }, 600);
-
         return () => clearTimeout(timeoutId);
       }
     }, [isOpen]);
 
-    const handleClose = useCallback(() => {
+    const handleClose = () => {
       handleOpenChange(false);
-    }, [handleOpenChange]);
+    };
 
-    const handleClickOutside = (e: MouseEvent<HTMLDialogElement>) => {
+    const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
       const dialog = modalRef.current;
       if (!dialog || !isDismissable) return;
 
@@ -109,7 +105,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       }
     };
 
-    const handleKeyDown = (e: KeyboardEvent<HTMLDialogElement>) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
       if (isKeyboardDismissDisabled && e.key === "Escape") {
         e.preventDefault();
         return;
@@ -120,43 +116,62 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       }
     };
 
+    if (!isOpen && !isAnimatingOut) return null;
+
     return (
-      <dialog
-        ref={modalRef}
-        onClick={handleClickOutside}
-        onKeyDown={handleKeyDown}
-        aria-modal="true"
-        aria-label={ariaLabel}
-        role="dialog"
+      // Backdrop
+      <div
         className={cn(
-          "z-40 overflow-auto",
-          isOpen && "animate-modalOpen",
-          isAnimatingOut && "animate-modalClose",
-          modalStyles({ size, backdrop }),
-          className
+          "fixed flex justify-center items-center inset-0 transition-opacity",
+          isOpen
+            ? "animate-modalOpen"
+            : isAnimatingOut
+            ? "animate-modalClose"
+            : "",
+          backdropStyles({ backdrop })
         )}
-        {...props}
       >
-        <div className="relative">
+        {/* Modal */}
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={ariaLabel}
+          ref={modalRef}
+          tabIndex={-1}
+          onClick={handleClickOutside}
+          onKeyDown={handleKeyDown}
+          className={cn(
+            "z-40 overflow-y-auto",
+            isAnimatingOut
+              ? "animate-modalClose"
+              : isOpen
+              ? "animate-modalOpen"
+              : "",
+            modalStyles({ size }),
+            className
+          )}
+          {...props}
+        >
           <button
             onClick={handleClose}
-            className="absolute cursor-pointer z-50 right-1.5 -top-3.5 w-7 h-7 text-xl font-light rounded-full text-gray-500 hover:bg-stone-100 transition-all duration-200 focus:outline-none"
+            className="z-50 absolute text-stone-500 duration-300 hover:bg-stone-100 cursor-pointer top-1.5 right-1.5 rounded-full w-7 h-7 text-xl font-light focus:outline-none"
             aria-label="Close modal"
           >
             ×
           </button>
+
+          {isValidElement(children) && children.type === ModalContent
+            ? cloneElement(children as ReactElement<ModalContentProps>, {
+                onClose: handleClose,
+              })
+            : children}
         </div>
-        {isValidElement(children) && children.type === ModalContent
-          ? cloneElement(children as ReactElement<ModalContentProps>, {
-              onClose: handleClose,
-            })
-          : children}
-      </dialog>
+      </div>
     );
   }
 );
 
-Modal.displayName = "Modal";
+NewModal.displayName = "NewModal";
 
 type ModalContentProps = {
   className?: string;
@@ -169,9 +184,7 @@ export const ModalContent = ({
   children,
   onClose,
 }: ModalContentProps) => (
-  <div
-    className={cn("w-[92%] h-full px-2 mx-auto overflow-y-scroll", className)}
-  >
+  <div className={cn("w-[92%] h-full px-2 mx-auto", className)}>
     {typeof children === "function" ? children(onClose!) : children}
   </div>
 );
