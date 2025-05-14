@@ -164,7 +164,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onClick={(e) => {
           setTimeout(() => {
             props.onClick?.(e);
-          }, 50);
+          }, 100);
         }}
         {...props}
       >

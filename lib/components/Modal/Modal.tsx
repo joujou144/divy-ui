@@ -7,6 +7,7 @@ import {
   cloneElement,
   forwardRef,
   isValidElement,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -85,9 +86,9 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       }
     }, [isOpen]);
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
       handleOpenChange(false);
-    };
+    }, [handleOpenChange]);
 
     const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
       const dialog = modalRef.current;
@@ -122,11 +123,11 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       // Backdrop
       <div
         className={cn(
-          "fixed flex justify-center items-center inset-0 transition-opacity",
+          "fixed flex justify-center items-center inset-0 transition-all",
           isOpen
-            ? "animate-modalOpen"
+            ? "animate-backdropVisible"
             : isAnimatingOut
-            ? "animate-modalClose"
+            ? "animate-backdropInvisible"
             : "",
           backdropStyles({ backdrop })
         )}
