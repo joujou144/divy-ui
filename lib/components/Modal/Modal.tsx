@@ -30,7 +30,7 @@ const modalStyles = cva(
   }
 );
 
-const backdropStyles = cva("duration-300", {
+const backdropStyles = cva("", {
   variants: {
     backdrop: {
       darken: "bg-black/30",
