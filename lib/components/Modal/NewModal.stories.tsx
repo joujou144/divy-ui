@@ -1,8 +1,6 @@
 import { Button } from "@/lib/components/Button/Button";
 import { useDisclosure } from "@/lib/components/Modal/useDisclosure";
-import { createRipple } from "@/lib/utils/helper/createRipple";
 import type { Meta, StoryObj } from "@storybook/react";
-import { useRef } from "react";
 import {
   ModalBody,
   ModalContent,
@@ -38,35 +36,15 @@ type Story = StoryObj<typeof NewModal>;
 
 const ModalExample = (args: ModalProps) => {
   const { isOpen, onOpenModal, handleOpenChange } = useDisclosure();
-  const testButtonRef = useRef<HTMLButtonElement | null>(null);
 
   return (
     <>
       <Button
         color="success"
-        onClick={() => {
-          console.log("open");
-
-          setTimeout(() => {
-            onOpenModal();
-          }, 200); // 5
-        }}
-        className="w-30 absolute top-2 left-2"
+        onClick={onOpenModal}
+        className="w-30 absolute top-2 left-2 py-2 px-3"
       >
         Open Modal
-      </Button>
-
-      <Button
-        ref={testButtonRef}
-        onClick={(e) => {
-          console.log("clicked");
-          if (testButtonRef.current) {
-            createRipple(e, testButtonRef.current);
-          }
-        }}
-        className="w-30"
-      >
-        Test ripple
       </Button>
 
       <NewModal

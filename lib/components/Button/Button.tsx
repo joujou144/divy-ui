@@ -30,7 +30,7 @@ const buttonStyles = cva(
           "border-[2px] border-transparent bg-transparent transition-colors",
       },
       size: {
-        sm: "px-4 py-2 text-sm",
+        sm: "text-sm",
         md: "px-4 py-2 text-base",
         lg: "px-6 py-3 text-lg",
       },
@@ -156,13 +156,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           buttonStyles({ color, variant, size, radius, isLoading, withIcon }),
           className
         )}
-        onClick={(e) => {
+        onPointerDown={(e) => {
           if (buttonRef.current) {
             createRipple(e, buttonRef.current);
           }
+        }}
+        onClick={(e) => {
           setTimeout(() => {
             props.onClick?.(e);
-          }, 200);
+          }, 50);
         }}
         {...props}
       >

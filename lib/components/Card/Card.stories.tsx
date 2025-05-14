@@ -115,12 +115,13 @@ export const FooterBlurred: StoryObj<typeof Card> = {
         width={220}
       />
       <CardFooter
-        className="px-3 flex justify-between items-center border-white/40 border overflow-hidden py-2 absolute bg-white/10 rounded-2xl right-1.5 left-1.5 rect backdrop-blur-sm bottom-3 shadow-sm z-10"
+        className="px-2 flex justify-between items-center border-white/40 border overflow-hidden py-2 absolute bg-white/10 rounded-2xl right-1.5 left-1.5 rect backdrop-blur-sm bottom-3 shadow-sm z-10"
         role="contentinfo"
       >
         <p className="text-xs text-white/80 w-1/2">Available soon.</p>
         <Button
-          className="text-xs text-white bg-black/20 w-1/2"
+          onClick={() => console.log("buy me")}
+          className="text-xs text-white bg-black/20 w-1/2 py-2"
           color="primary"
           radius="full"
           size="sm"
