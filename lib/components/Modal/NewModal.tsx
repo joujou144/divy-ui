@@ -80,7 +80,7 @@ export const NewModal = forwardRef<HTMLDivElement, ModalProps>(
         setIsAnimatingOut(true);
         const timeoutId = setTimeout(() => {
           setIsAnimatingOut(false);
-        }, 600);
+        }, 300);
         return () => clearTimeout(timeoutId);
       }
     }, [isOpen]);

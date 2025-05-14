@@ -120,7 +120,6 @@ export const FooterBlurred: StoryObj<typeof Card> = {
       >
         <p className="text-xs text-white/80 w-1/2">Available soon.</p>
         <Button
-          onClick={() => console.log("buy me")}
           className="text-xs text-white bg-black/20 w-1/2 py-2"
           color="primary"
           radius="full"

@@ -1,5 +1,5 @@
 import { Button } from "@/lib/components/Button/Button";
-import { useDisclosure } from "@/lib/components/Modal/useDisclosure";
+import { useDisclosure } from "@/lib/utils/hooks/useDisclosure";
 import type { Meta, StoryObj } from "@storybook/react";
 import {
   ModalBody,
