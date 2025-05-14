@@ -1,5 +1,5 @@
-import { createRipple } from "@/lib/components/Button/createRipple";
 import { cn } from "@/lib/utils";
+import { createRipple } from "@/lib/utils/helper/createRipple";
 import { cva } from "class-variance-authority";
 import { ComponentProps, forwardRef, ReactNode, useRef } from "react";
 
@@ -143,31 +143,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const withIcon = Boolean(icon);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-    // const createRipple = (event: React.MouseEvent<HTMLButtonElement>) => {
-    //   const button = buttonRef.current;
-    //   if (!button) return;
-
-    //   const circle = document.createElement("span");
-    //   const diameter = Math.max(button.clientWidth, button.clientHeight);
-    //   const radius = diameter / 2;
-
-    //   circle.style.width = circle.style.height = `${diameter}px`;
-    //   circle.style.left = `${
-    //     event.clientX - button.getBoundingClientRect().left - radius
-    //   }px`;
-    //   circle.style.top = `${
-    //     event.clientY - button.getBoundingClientRect().top - radius
-    //   }px`;
-    //   circle.classList.add("ripple");
-
-    //   const ripple = button.getElementsByClassName("ripple")[0];
-    //   if (ripple) {
-    //     ripple.remove();
-    //   }
-
-    //   button.appendChild(circle);
-    // };
-
     return (
       <button
         ref={(node) => {
@@ -187,7 +162,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           }
           setTimeout(() => {
             props.onClick?.(e);
-          }, 100);
+          }, 200);
         }}
         {...props}
       >

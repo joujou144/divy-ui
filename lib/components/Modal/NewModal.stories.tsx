@@ -1,6 +1,6 @@
 import { Button } from "@/lib/components/Button/Button";
-import { createRipple } from "@/lib/components/Button/createRipple";
 import { useDisclosure } from "@/lib/components/Modal/useDisclosure";
+import { createRipple } from "@/lib/utils/helper/createRipple";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useRef } from "react";
 import {
@@ -47,12 +47,11 @@ const ModalExample = (args: ModalProps) => {
         onClick={() => {
           console.log("open");
 
-          //   setTimeout(() => {
-          //     onOpenModal();
-          //   }, 75); // 5
-          onOpenModal();
+          setTimeout(() => {
+            onOpenModal();
+          }, 200); // 5
         }}
-        className="w-30"
+        className="w-30 absolute top-2 left-2"
       >
         Open Modal
       </Button>
