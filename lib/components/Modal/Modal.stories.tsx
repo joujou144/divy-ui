@@ -39,7 +39,11 @@ const ModalExample = (args: ModalProps) => {
 
   return (
     <>
-      <Button onClick={onOpenModal} className="absolute top-2 left-2 w-30">
+      <Button
+        color="success"
+        onClick={onOpenModal}
+        className="w-30 absolute top-2 left-2 py-2 px-3"
+      >
         Open Modal
       </Button>
 
