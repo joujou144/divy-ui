@@ -6,6 +6,7 @@ export const LinkIcon = (props: SVGProps<SVGSVGElement>) => (
     width="13"
     height="13"
     fill="currentColor"
+    data-slot="icon"
     viewBox="0 0 16 16"
     {...props}
   >

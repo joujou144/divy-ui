@@ -6,6 +6,7 @@ export const AttachmentIcon = (props: SVGProps<SVGSVGElement>) => (
     width="20"
     height="20"
     viewBox="0 0 24 24"
+    data-slot="icon"
     fill="currentColor"
     aria-hidden="true"
     {...props}
