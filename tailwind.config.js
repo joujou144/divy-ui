@@ -94,27 +94,17 @@ export default {
         },
       },
       animation: {
-        backdropVisible: "backdropVisible 300ms ease-out forwards",
-        backdropInvisible: "backdropInvisible 300ms ease-in forwards",
-        modalOpen: "modalOpen 300ms ease-out forwards",
-        modalClose: "modalClose 300ms ease-in forwards",
+        fadeOut: "fadeOut 0.3s ease-out forwards",
+        fadeIn: "fadeIn 0.2s ease-in forwards",
       },
       keyframes: {
-        backdropVisible: {
-          "0%": { opacity: 0, visibility: "invisible" },
-          "100%": { opacity: 1, visibility: "visible" },
+        fadeOut: {
+          "0%": { opacity: 0, transform: "translateY(1rem) scale(0.95)" },
+          "100%": { opacity: 1, transform: "translateY(0) scale(1)" },
         },
-        backdropInvisible: {
-          "0%": { opacity: 1, visibility: "visible" },
-          "100%": { opacity: 0, visibility: "invisible" },
-        },
-        modalOpen: {
-          "0%": { opacity: 0 },
-          "100%": { opacity: 1 },
-        },
-        modalClose: {
-          "0%": { opacity: 1 },
-          "100%": { opacity: 0 },
+        fadeIn: {
+          "0%": { opacity: 1, transform: "translateY(0) scale(1)" },
+          "100%": { opacity: 0, transform: "translateY(1rem) scale(0.95)" },
         },
       },
     },
