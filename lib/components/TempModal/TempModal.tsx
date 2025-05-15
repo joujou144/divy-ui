@@ -9,6 +9,7 @@ import {
   ReactNode,
   useEffect,
   useRef,
+  useState,
 } from "react";
 
 const modalStyles = cva(
@@ -68,6 +69,8 @@ export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
     },
     ref
   ) => {
+    const [shouldRender, setShouldRender] = useState(isOpen);
+    const [modalClosing, setModalClosing] = useState(false);
     const localRef = useRef<HTMLDivElement>(null);
     const modalRef = (ref as React.RefObject<HTMLDivElement>) ?? localRef;
 
@@ -93,6 +96,21 @@ export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
     };
 
     useEffect(() => {
+      if (isOpen) {
+        setShouldRender(true);
+        setModalClosing(false);
+      } else {
+        setModalClosing(true);
+        const timeoutId = setTimeout(() => {
+          setShouldRender(false);
+          setModalClosing(false);
+        }, 350);
+
+        return () => clearTimeout(timeoutId);
+      }
+    }, [isOpen]);
+
+    useEffect(() => {
       if (isOpen && modalRef.current) modalRef.current.focus();
     }, [isOpen]);
 
@@ -108,7 +126,7 @@ export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
       };
     }, [isOpen]);
 
-    if (!isOpen) return null;
+    if (!shouldRender) return null;
 
     return (
       // Overlay
@@ -117,7 +135,10 @@ export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
         <div
           aria-hidden="true"
           className={cn(
-            "transition-opacity duration-300 ease-out",
+            "transition-all",
+            modalClosing
+              ? "opacity-0 duration-300 ease-in"
+              : "opacity-100 duration-300 ease-out",
             backdropStyles({ backdrop })
           )}
         />
@@ -135,8 +156,9 @@ export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
               ref={modalRef}
               onKeyDown={handleKeyDown}
               className={cn(
-                "bg-white",
-                isOpen && "animate-fadeOut",
+                "bg-white duration-300",
+                modalClosing ? "animate-fadeIn" : "animate-fadeOut",
+
                 className,
                 modalStyles({ size })
               )}
