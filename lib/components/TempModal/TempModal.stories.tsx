@@ -23,7 +23,11 @@ const ModalExample = () => {
 
   return (
     <>
-      <Button size="sm" onClick={onOpenModal}>
+      <Button
+        size="sm"
+        onClick={onOpenModal}
+        className="absolute top-2 left-2 w-30"
+      >
         Open Temp Modal
       </Button>
 

@@ -99,6 +99,10 @@ export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
       if (isOpen) {
         setShouldRender(true);
         setModalClosing(false);
+
+        requestAnimationFrame(() => {
+          setModalClosing(false);
+        });
       } else {
         setModalClosing(true);
         const timeoutId = setTimeout(() => {
@@ -135,10 +139,9 @@ export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
         <div
           aria-hidden="true"
           className={cn(
-            "transition-all",
-            modalClosing
-              ? "opacity-0 duration-300 ease-in"
-              : "opacity-100 duration-300 ease-out",
+            "transition-colors",
+            // shouldRender && isOpen ? "opacity-100" : "opacity-0",
+            modalClosing ? "invisible" : "visible",
             backdropStyles({ backdrop })
           )}
         />
@@ -156,9 +159,8 @@ export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
               ref={modalRef}
               onKeyDown={handleKeyDown}
               className={cn(
-                "bg-white duration-300",
+                "bg-white",
                 modalClosing ? "animate-fadeIn" : "animate-fadeOut",
-
                 className,
                 modalStyles({ size })
               )}
