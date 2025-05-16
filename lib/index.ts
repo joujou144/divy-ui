@@ -7,6 +7,6 @@ export * from "./components/icons";
 export * from "./components/Image/Image";
 export * from "./components/Input/Input";
 export * from "./components/Link/Link";
+export * from "./components/Modal";
 export * from "./components/Progress/Progress";
-export * from "./components/TempModal";
 export * from "./utils";

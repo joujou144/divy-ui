@@ -54,7 +54,7 @@ export interface ModalProps extends ComponentProps<"div"> {
   handleOpenChange: (open: boolean) => void;
 }
 
-export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
+export const Modal = forwardRef<HTMLDivElement, ModalProps>(
   (
     {
       children,
@@ -136,7 +136,7 @@ export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
         <div
           aria-hidden="true"
           className={cn(
-            "transition-all duration-300",
+            "transition-all",
             modalClosing ? "animate-backdropExit" : "animate-backdropEnter",
             backdropStyles({ backdrop })
           )}
@@ -182,7 +182,7 @@ export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
   }
 );
 
-TempModal.displayName = "TempModal";
+Modal.displayName = "Modal";
 
 type ModalContentProps = {
   className?: string;

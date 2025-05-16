@@ -1,22 +1,22 @@
 import { Button } from "@/lib/components/Button/Button";
-import { useDisclosure } from "@/lib/components/TempModal";
+import { useDisclosure } from "@/lib/components/Modal";
 import { Meta, StoryObj } from "@storybook/react";
 import {
+  Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalTitle,
-  TempModal,
-} from "./TempModal";
+} from "./Modal";
 
-const meta: Meta<typeof TempModal> = {
-  component: TempModal,
+const meta: Meta<typeof Modal> = {
+  component: Modal,
   tags: ["autodocs"],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof TempModal>;
+type Story = StoryObj<typeof Modal>;
 
 const ModalExample = () => {
   const { isOpen, onOpenModal, handleOpenChange } = useDisclosure();
@@ -31,7 +31,7 @@ const ModalExample = () => {
         Open Temp Modal
       </Button>
 
-      <TempModal isOpen={isOpen} handleOpenChange={handleOpenChange}>
+      <Modal isOpen={isOpen} handleOpenChange={handleOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
@@ -71,7 +71,7 @@ const ModalExample = () => {
             </>
           )}
         </ModalContent>
-      </TempModal>
+      </Modal>
     </>
   );
 };
