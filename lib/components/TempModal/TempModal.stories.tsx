@@ -1,5 +1,5 @@
 import { Button } from "@/lib/components/Button/Button";
-import { useDisclosure } from "@/lib/components/Modal";
+import { useDisclosure } from "@/lib/components/TempModal";
 import { Meta, StoryObj } from "@storybook/react";
 import {
   ModalBody,
