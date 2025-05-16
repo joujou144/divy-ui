@@ -28,7 +28,7 @@ const ModalExample = () => {
         onClick={onOpenModal}
         className="absolute top-2 left-2 w-30"
       >
-        Open Temp Modal
+        Open Modal
       </Button>
 
       <Modal isOpen={isOpen} handleOpenChange={handleOpenChange}>

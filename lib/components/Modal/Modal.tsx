@@ -12,6 +12,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import ReactDOM from "react-dom";
 
 const modalStyles = cva(
   "relative overflow-hidden py-5 transform rounded-lg shadow-xl transition-all",
@@ -129,7 +130,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
 
     if (!renderModal) return null;
 
-    return (
+    return ReactDOM.createPortal(
       // Overlay
       <div className="relative z-10" onClick={handleClickOutside}>
         {/* Backdrop */}
@@ -177,7 +178,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
             </div>
           </div>
         </div>
-      </div>
+      </div>,
+      document.body
     );
   }
 );
