@@ -1,52 +1,33 @@
-import { useCallback, useState } from "react";
+import { useControlledState } from "@react-stately/utils";
+import { useCallback } from "react";
 
 type UseDisclosureProps = {
-  isOpen?: boolean;
-  defaultOpen?: boolean;
-  onOpen?: () => void;
-  onClose?: () => void;
+  isOpen?: boolean; // controlled mode
+  defaultOpen?: boolean; // uncontrolled mode
   onChange?: (isOpen: boolean) => void;
 };
 
-export function useDisclosure({
-  isOpen: isOpenProp,
-  defaultOpen = false,
-  onOpen,
-  onClose,
-  onChange,
-}: UseDisclosureProps = {}) {
-  const isControlled = isOpenProp !== undefined;
-  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+export function useDisclosure(props: UseDisclosureProps = {}) {
+  const { isOpen: isOpenProp, defaultOpen = false, onChange } = props;
 
-  const isOpen = isControlled ? isOpenProp! : uncontrolledOpen;
-
-  const setOpen = useCallback(
-    (open: boolean) => {
-      if (!isControlled) {
-        setUncontrolledOpen(open);
-      }
-
-      if (open) {
-        onOpen?.();
-      } else {
-        onClose?.();
-      }
-
-      onChange?.(open);
-    },
-    [isControlled, onOpen, onClose, onChange]
+  const [isOpen, setIsOpen] = useControlledState(
+    isOpenProp,
+    defaultOpen,
+    onChange
   );
 
-  const onOpenModal = useCallback(() => {
-    setOpen(true);
-  }, [setOpen]);
+  const onOpen = useCallback(() => setIsOpen(true), [setIsOpen]);
+  const onClose = useCallback(() => setIsOpen(false), [setIsOpen]);
 
-  const handleOpenChange = useCallback(
-    (open: boolean) => {
-      setOpen(open);
-    },
-    [setOpen]
+  const onOpenChange = useCallback(
+    (open: boolean) => setIsOpen(open),
+    [setIsOpen]
   );
 
-  return { isOpen, onOpenModal, handleOpenChange };
+  return {
+    isOpen,
+    onOpen,
+    onClose,
+    onOpenChange,
+  };
 }

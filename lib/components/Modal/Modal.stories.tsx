@@ -19,19 +19,16 @@ export default meta;
 type Story = StoryObj<typeof Modal>;
 
 const ModalExample = () => {
-  const { isOpen, onOpenModal, handleOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
     <>
-      <Button
-        size="sm"
-        onClick={onOpenModal}
-        className="absolute top-2 left-2 w-30"
-      >
+      {/* User's button to trigger opening the modal */}
+      <Button size="sm" onClick={onOpen} className="absolute top-2 left-2 w-30">
         Open Modal
       </Button>
 
-      <Modal isOpen={isOpen} handleOpenChange={handleOpenChange}>
+      <Modal isOpen={isOpen} handleOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
