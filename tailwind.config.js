@@ -94,10 +94,28 @@ export default {
         },
       },
       animation: {
+        backdropEnter: "backdropEnter 0.3s ease",
+        backdropExit: "backdropExit 0.3s ease-in forwards",
         fadeOut: "fadeOut 0.3s ease-out forwards",
         fadeIn: "fadeIn 0.3s ease-in forwards",
       },
       keyframes: {
+        backdropEnter: {
+          "0%": {
+            opacity: 0,
+          },
+          "100%": {
+            opacity: 1,
+          },
+        },
+        backdropExit: {
+          "0%": {
+            opacity: 1,
+          },
+          "100%": {
+            opacity: 0,
+          },
+        },
         fadeOut: {
           "0%": {
             opacity: 0,

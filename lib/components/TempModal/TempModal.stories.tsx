@@ -32,7 +32,7 @@ const ModalExample = () => {
       </Button>
 
       <TempModal isOpen={isOpen} handleOpenChange={handleOpenChange}>
-        <ModalContent className="">
+        <ModalContent>
           {(onClose) => (
             <>
               <ModalTitle>Temp Modal</ModalTitle>
@@ -57,7 +57,13 @@ const ModalExample = () => {
                 </p>
               </ModalBody>
               <ModalFooter className="flex justify-between gap-5">
-                <Button variant="outline" onClick={onClose}>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    console.log("cancel here");
+                    onClose;
+                  }}
+                >
                   Cancel
                 </Button>
                 <Button>Confirm</Button>

@@ -1,25 +1,26 @@
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
-import {
+import React, {
   cloneElement,
   ComponentProps,
   forwardRef,
   isValidElement,
   ReactElement,
   ReactNode,
+  useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
 
 const modalStyles = cva(
-  "relative transform overflow-hidden rounded-lg shadow-xl transition-all",
+  "relative overflow-hidden py-5 transform rounded-lg shadow-xl transition-all",
   {
     variants: {
       size: {
         xs: "max-w-xs",
-        sm: "max-w-sm",
-        md: "max-w-md",
+        sm: "max-w-sm h-[510px]",
+        md: "max-w-md h-[490px]",
         lg: "max-w-lg",
         xl: "max-w-xl",
       },
@@ -38,12 +39,12 @@ const backdropStyles = cva("fixed inset-0", {
     },
   },
   defaultVariants: {
-    backdrop: "darken",
+    backdrop: "blur",
   },
 });
 
 export interface ModalProps extends ComponentProps<"div"> {
-  children: ReactNode;
+  children: ReactElement;
   isOpen: boolean;
   ariaLabel?: string;
   backdrop?: "darken" | "blur";
@@ -69,14 +70,15 @@ export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
     },
     ref
   ) => {
-    const [shouldRender, setShouldRender] = useState(isOpen);
+    const [renderModal, setRenderModal] = useState(isOpen);
     const [modalClosing, setModalClosing] = useState(false);
     const localRef = useRef<HTMLDivElement>(null);
     const modalRef = (ref as React.RefObject<HTMLDivElement>) ?? localRef;
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
+      console.log("handle close called");
       handleOpenChange(false);
-    };
+    }, [handleOpenChange]);
 
     const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
       if (!modalRef.current || !isDismissable) return;
@@ -97,17 +99,12 @@ export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
 
     useEffect(() => {
       if (isOpen) {
-        setShouldRender(true);
+        setRenderModal(true);
         setModalClosing(false);
-
-        requestAnimationFrame(() => {
-          setModalClosing(false);
-        });
       } else {
         setModalClosing(true);
         const timeoutId = setTimeout(() => {
-          setShouldRender(false);
-          setModalClosing(false);
+          setRenderModal(false);
         }, 350);
 
         return () => clearTimeout(timeoutId);
@@ -130,7 +127,7 @@ export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
       };
     }, [isOpen]);
 
-    if (!shouldRender) return null;
+    if (!renderModal) return null;
 
     return (
       // Overlay
@@ -139,9 +136,8 @@ export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
         <div
           aria-hidden="true"
           className={cn(
-            "transition-colors",
-            // shouldRender && isOpen ? "opacity-100" : "opacity-0",
-            modalClosing ? "invisible" : "visible",
+            "transition-all duration-300",
+            modalClosing ? "animate-backdropExit" : "animate-backdropEnter",
             backdropStyles({ backdrop })
           )}
         />
@@ -190,8 +186,8 @@ TempModal.displayName = "TempModal";
 
 type ModalContentProps = {
   className?: string;
-  onClose?: () => void;
   children: ReactNode | ((onClose: () => void) => ReactNode);
+  onClose?: () => void;
 };
 
 export const ModalContent = ({
@@ -199,7 +195,7 @@ export const ModalContent = ({
   children,
   onClose,
 }: ModalContentProps) => (
-  <div className={cn("w-[92%] px-1 py-4 mx-auto", className)}>
+  <div className={cn("h-full w-[92%] mx-auto px-1 overflow-y-auto", className)}>
     {typeof children === "function" ? children(onClose!) : children}
   </div>
 );
