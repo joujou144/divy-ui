@@ -201,20 +201,3 @@ export const ModalContent = ({
     {typeof children === "function" ? children(onClose!) : children}
   </div>
 );
-
-export const ModalTitle = ({ className, ...props }: ComponentProps<"h2">) => (
-  <h2
-    role="heading"
-    aria-level={2}
-    className={cn("font-semibold", className)}
-    {...props}
-  />
-);
-
-export const ModalBody = ({ className, ...props }: ComponentProps<"div">) => (
-  <div role="document" className={cn("pt-6", className)} {...props} />
-);
-
-export const ModalFooter = ({ className, ...props }: ComponentProps<"div">) => (
-  <div role="contentinfo" className={cn("pt-6", className)} {...props} />
-);
