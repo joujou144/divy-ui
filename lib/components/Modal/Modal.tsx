@@ -20,7 +20,7 @@ const modalStyles = cva(
     variants: {
       size: {
         xs: "max-w-xs",
-        sm: "max-w-sm h-[510px]",
+        sm: "max-w-sm h-40",
         md: "max-w-md h-[490px]",
         lg: "max-w-lg",
         xl: "max-w-xl",
@@ -168,7 +168,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                 className="z-50 absolute text-stone-500 duration-300 hover:bg-stone-100 cursor-pointer top-1.5 right-1.5 rounded-full w-7 h-7 text-xl font-light focus:outline-none"
                 aria-label="Close modal"
               >
-                ×
+                &times;
               </button>
               {isValidElement(children) && children.type === ModalContent
                 ? cloneElement(children as ReactElement<ModalContentProps>, {
