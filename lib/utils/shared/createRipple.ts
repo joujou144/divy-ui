@@ -1,7 +1,7 @@
-export const createRipple = (
+export function createRipple(
   event: React.MouseEvent<HTMLElement>,
   target: HTMLElement
-) => {
+) {
   const circle = document.createElement("span");
   const diameter = Math.max(target.clientWidth, target.clientHeight);
   const radius = diameter / 2;
@@ -21,4 +21,4 @@ export const createRipple = (
   }
 
   target.appendChild(circle);
-};
+}

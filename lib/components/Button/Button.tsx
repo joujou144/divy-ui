@@ -1,5 +1,4 @@
-import { cn } from "@/lib/utils";
-import { createRipple } from "@/lib/utils/helper/createRipple";
+import { cn, createRipple } from "@/lib/utils/shared";
 import { cva } from "class-variance-authority";
 import { ComponentProps, forwardRef, ReactNode, useRef } from "react";
 

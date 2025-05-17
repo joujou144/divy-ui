@@ -1,5 +1,5 @@
 import { LinkIcon } from "@/lib/components/icons";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/shared";
 import { ComponentProps, forwardRef, ReactNode } from "react";
 
 interface LinkProps extends ComponentProps<"a"> {
