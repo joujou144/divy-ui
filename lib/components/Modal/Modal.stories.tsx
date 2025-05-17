@@ -1,13 +1,10 @@
 import { Button } from "@/lib/components/Button/Button";
+import { ModalBody } from "@/lib/components/Modal/ModalBody";
+import { ModalFooter } from "@/lib/components/Modal/ModalFooter";
+import { ModalHeader } from "@/lib/components/Modal/ModalHeader";
 import { useDisclosure } from "@/lib/utils/hooks";
 import { Meta, StoryObj } from "@storybook/react";
-import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalTitle,
-} from "./Modal";
+import { Modal, ModalContent } from "./Modal";
 
 const meta: Meta<typeof Modal> = {
   component: Modal,
@@ -32,7 +29,7 @@ const ModalExample = () => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalTitle>Temp Modal</ModalTitle>
+              <ModalHeader>Temp Modal</ModalHeader>
               <ModalBody className="flex flex-col gap-2 font-light tracking-wide">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.

@@ -3,12 +3,12 @@ import { cn } from "@/lib/utils/shared";
 import { HTMLPolymorphicProps } from "@/lib/utils/types";
 import { forwardRef, ReactNode } from "react";
 
-export interface ModalFooterProps extends HTMLPolymorphicProps<"div"> {
+export interface ModalHeaderProps extends HTMLPolymorphicProps<"header"> {
   children: ReactNode;
   className?: string;
 }
 
-export const ModalFooter = forwardRef<HTMLDivElement, ModalFooterProps>(
+export const ModalHeader = forwardRef<HTMLHeadingElement, ModalHeaderProps>(
   (props, ref) => {
     const { as, children, className, ...otherProps } = props;
     const domRef = useDOMRef(ref);
@@ -17,9 +17,10 @@ export const ModalFooter = forwardRef<HTMLDivElement, ModalFooterProps>(
 
     return (
       <Component
-        role="contentinfo"
+        role="heading"
+        aria-level={2}
         ref={domRef}
-        className={cn("pt-6", className)}
+        className={cn("font-semibold", className)}
         {...otherProps}
       >
         {children}
@@ -27,3 +28,5 @@ export const ModalFooter = forwardRef<HTMLDivElement, ModalFooterProps>(
     );
   }
 );
+
+ModalHeader.displayName = "ModalHeader";
