@@ -48,3 +48,14 @@ export type PolymorphicComponentPropsWithRef<
   C extends React.ElementType,
   Props = {}
 > = PolymorphicComponentProps<C, Props> & { ref?: PolymorphicRef<C> };
+
+/**
+ * Base utility, reusable everywhere to handle polymorphic components
+ * in a more streamlined and non-generic-forwardRef
+ */
+export type HTMLPolymorphicProps<T extends React.ElementType> = Omit<
+  React.ComponentPropsWithoutRef<T>,
+  "as" | "ref"
+> & {
+  as?: T;
+};
