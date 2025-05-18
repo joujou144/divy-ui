@@ -1,204 +1,52 @@
-import { cn } from "@/lib/utils/shared";
-import { cva } from "class-variance-authority";
-import React, {
-  cloneElement,
-  ComponentProps,
-  forwardRef,
-  isValidElement,
-  ReactElement,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ModalBackdrop } from "@/lib/components/Modal/ModalBackdrop";
+import {
+  useModal,
+  type UseModalOptions,
+} from "@/lib/components/Modal/useModal";
+import { forwardRef, type ReactNode, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
+import { ModalProvider } from "./ModalProvider";
 
-const modalStyles = cva(
-  "relative overflow-hidden py-5 transform rounded-lg shadow-xl transition-all",
-  {
-    variants: {
-      size: {
-        xs: "max-w-xs",
-        sm: "max-w-sm h-40",
-        md: "max-w-md h-[490px]",
-        lg: "max-w-lg",
-        xl: "max-w-xl",
-      },
-    },
-    defaultVariants: {
-      size: "md",
-    },
-  }
-);
-
-const backdropStyles = cva("fixed inset-0", {
-  variants: {
-    backdrop: {
-      darken: "bg-black/30",
-      blur: "bg-black/20 backdrop-blur-sm",
-    },
-  },
-  defaultVariants: {
-    backdrop: "blur",
-  },
-});
-
-export interface ModalProps extends ComponentProps<"div"> {
-  children: ReactElement;
-  isOpen: boolean;
-  ariaLabel?: string;
-  backdrop?: "darken" | "blur";
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
-  isDismissable?: boolean;
-  isKeyboardDismissDisabled?: boolean;
-  handleOpenChange: (open: boolean) => void;
+interface ModalProps extends UseModalOptions {
+  children: ReactNode;
 }
 
-export const Modal = forwardRef<HTMLDivElement, ModalProps>(
-  (
-    {
-      children,
-      isOpen,
-      size,
-      className,
-      ariaLabel,
-      backdrop,
-      handleOpenChange,
-      isDismissable = true,
-      isKeyboardDismissDisabled = false,
-      ...props
-    },
-    ref
-  ) => {
-    const [renderModal, setRenderModal] = useState(isOpen);
-    const [modalClosing, setModalClosing] = useState(false);
-    const localRef = useRef<HTMLDivElement>(null);
-    const modalRef = (ref as React.RefObject<HTMLDivElement>) ?? localRef;
+export const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
+  const { children, ...otherProps } = props;
+  const context = useModal({ ...otherProps, ref });
+  const [renderModal, setRenderModal] = useState(context.isOpen);
 
-    const handleClose = useCallback(() => {
-      console.log("handle close called");
-      handleOpenChange(false);
-    }, [handleOpenChange]);
+  // Animation exit timing
+  useEffect(() => {
+    if (context.isOpen) {
+      setRenderModal(true);
+    } else {
+      const timeout = setTimeout(() => setRenderModal(false), 350);
+      return () => clearTimeout(timeout);
+    }
+  }, [context.isOpen]);
 
-    const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
-      if (!modalRef.current || !isDismissable) return;
+  // Block scroll when modal is open
+  useEffect(() => {
+    if (context.isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
-      if (!modalRef.current.contains(e.target as Node)) handleClose();
+    return () => {
+      document.body.style.overflow = "";
     };
+  }, [context.isOpen]);
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-      console.log("esc");
-      if (isKeyboardDismissDisabled && e.key === "Escape") {
-        e.preventDefault();
-        return;
-      }
+  if (!renderModal) return null;
 
-      if (e.key === "Escape" && isDismissable) {
-        handleClose();
-      }
-    };
-
-    useEffect(() => {
-      if (isOpen) {
-        setRenderModal(true);
-        setModalClosing(false);
-      } else {
-        setModalClosing(true);
-        const timeoutId = setTimeout(() => {
-          setRenderModal(false);
-        }, 350);
-
-        return () => clearTimeout(timeoutId);
-      }
-    }, [isOpen]);
-
-    useEffect(() => {
-      if (isOpen && modalRef.current) modalRef.current.focus();
-    }, [isOpen]);
-
-    useEffect(() => {
-      if (isOpen) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "";
-      }
-
-      return () => {
-        document.body.style.overflow = "";
-      };
-    }, [isOpen]);
-
-    if (!renderModal) return null;
-
-    return ReactDOM.createPortal(
-      // Overlay
-      <div className="relative z-10" onClick={handleClickOutside}>
-        {/* Backdrop */}
-        <div
-          aria-hidden="true"
-          className={cn(
-            "transition-all",
-            modalClosing ? "animate-backdropExit" : "animate-backdropEnter",
-            backdropStyles({ backdrop })
-          )}
-        />
-        {/* Centering container */}
-        <div className="fixed inset-0 z-10 w-screen">
-          {/* Large screens: center center; Mobile: bottom center */}
-          <div className="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
-            {/* Modal Box Container */}
-            <div
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="modal-title"
-              aria-label={ariaLabel}
-              tabIndex={-1}
-              ref={modalRef}
-              onKeyDown={handleKeyDown}
-              className={cn(
-                "bg-white",
-                modalClosing ? "animate-fadeIn" : "animate-fadeOut",
-                className,
-                modalStyles({ size })
-              )}
-              {...props}
-            >
-              <button
-                onClick={handleClose}
-                className="z-50 absolute text-stone-500 duration-300 hover:bg-stone-100 cursor-pointer top-1.5 right-1.5 rounded-full w-7 h-7 text-xl font-light focus:outline-none"
-                aria-label="Close modal"
-              >
-                &times;
-              </button>
-              {isValidElement(children) && children.type === ModalContent
-                ? cloneElement(children as ReactElement<ModalContentProps>, {
-                    onClose: handleClose,
-                  })
-                : children}
-            </div>
-          </div>
-        </div>
-      </div>,
-      document.body
-    );
-  }
-);
+  return ReactDOM.createPortal(
+    <ModalProvider value={context}>
+      <ModalBackdrop>{children}</ModalBackdrop>
+    </ModalProvider>,
+    document.body
+  );
+});
 
 Modal.displayName = "Modal";
-
-type ModalContentProps = {
-  className?: string;
-  children: ReactNode | ((onClose: () => void) => ReactNode);
-  onClose?: () => void;
-};
-
-export const ModalContent = ({
-  className,
-  children,
-  onClose,
-}: ModalContentProps) => (
-  <div className={cn("h-full w-[92%] mx-auto px-1 overflow-y-auto", className)}>
-    {typeof children === "function" ? children(onClose!) : children}
-  </div>
-);
