@@ -88,6 +88,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+      console.log("esc");
       if (isKeyboardDismissDisabled && e.key === "Escape") {
         e.preventDefault();
         return;
