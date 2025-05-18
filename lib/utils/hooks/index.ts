@@ -1,1 +1,1 @@
-export { useDisclosure } from "./useDisclosure";
+export * from "./useDisclosure";

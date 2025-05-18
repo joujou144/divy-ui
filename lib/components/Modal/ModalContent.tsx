@@ -1,6 +1,6 @@
 import { useModalContext } from "@/lib/components/Modal/ModalProvider";
 import { cn } from "@/lib/utils/shared";
-import { mergeRefs } from "@react-aria/utils";
+import { mergeRefs, useViewportSize } from "@react-aria/utils";
 import { cva } from "class-variance-authority";
 import { forwardRef, type ReactNode, useEffect } from "react";
 
@@ -35,6 +35,7 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
 
     const { isOpen, dialogRef, closeButtonRef, handleKeyDown, handleClose } =
       useModalContext();
+    const viewport = useViewportSize();
 
     // Focus on open
     useEffect(() => {
@@ -45,7 +46,16 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
 
     return (
       <div className="fixed inset-0 z-20 w-screen">
-        <div className="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
+        <div
+          data-slot="wrapper"
+          // set the height dynamically to avoid keyboard covering the bottom modal
+          style={
+            {
+              "--visual-viewport-height": `${viewport.height}px`,
+            } as React.CSSProperties
+          }
+          className={`flex min-h-[--visual-viewport-height] items-end justify-center p-4 sm:items-center sm:p-0`}
+        >
           <div
             ref={mergeRefs(dialogRef, ref)}
             role="dialog"
