@@ -1,5 +1,4 @@
-import { useDOMRef } from "@/lib/utils/hooks";
-import { cn } from "@/lib/utils/shared";
+import { cn, useDOMRef } from "@/lib/utils/shared";
 import { type HTMLPolymorphicProps } from "@/lib/utils/types";
 import { forwardRef, ReactNode } from "react";
 

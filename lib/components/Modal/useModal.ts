@@ -1,4 +1,4 @@
-import { useDOMRef } from "@/lib/utils/hooks";
+import { useDOMRef } from "@/lib/utils/shared";
 import { Ref, useCallback } from "react";
 import type { ModalContextProps } from "./ModalProvider";
 
