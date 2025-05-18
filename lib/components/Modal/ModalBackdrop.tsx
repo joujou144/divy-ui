@@ -23,7 +23,7 @@ export interface ModalBackdropProps {
 
 export const ModalBackdrop = forwardRef<HTMLDivElement, ModalBackdropProps>(
   (props, ref) => {
-    const { children, className, ...otherProps } = props;
+    const { children, ...otherProps } = props;
     const { isOpen, handleClickOutside, overlayRef } = useModalContext();
 
     return (
@@ -34,8 +34,7 @@ export const ModalBackdrop = forwardRef<HTMLDivElement, ModalBackdropProps>(
         className={cn(
           "fixed inset-0 transition-all z-10",
           isOpen ? "animate-backdropEnter" : "animate-backdropExit",
-          backdropStyles({ backdrop: "blur" }),
-          className
+          backdropStyles({ backdrop: "blur" })
         )}
         {...otherProps}
       >

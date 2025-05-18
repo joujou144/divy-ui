@@ -9,15 +9,15 @@ const modalStyles = cva(
   {
     variants: {
       size: {
-        xs: "max-w-xs",
-        sm: "max-w-sm h-40",
-        md: "max-w-md h-[490px]",
-        lg: "max-w-lg",
-        xl: "max-w-xl",
+        xs: "max-w-sm",
+        sm: "max-w-md",
+        md: "max-w-lg",
+        lg: "max-w-xl",
+        xl: "max-w-2xl",
       },
     },
     defaultVariants: {
-      size: "md",
+      size: "xs",
     },
   }
 );
@@ -31,13 +31,7 @@ interface ModalContentProps {
 
 export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
   (props, ref) => {
-    const {
-      children,
-      ariaLabel,
-      className,
-      size = "md",
-      ...otherProps
-    } = props;
+    const { children, ariaLabel, className, size, ...otherProps } = props;
 
     const { isOpen, dialogRef, closeButtonRef, handleKeyDown, handleClose } =
       useModalContext();
@@ -61,7 +55,7 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
             tabIndex={-1}
             onKeyDown={handleKeyDown}
             className={cn(
-              "relative bg-white overflow-hidden py-5 shadow-xl transition-all rounded-lg",
+              "relative bg-white overflow-hidden py-5 px-6 shadow-xl transition-all rounded-lg",
               modalStyles({ size }),
               isOpen ? "animate-fadeOut" : "animate-fadeIn",
               className
