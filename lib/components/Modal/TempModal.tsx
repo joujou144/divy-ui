@@ -1,55 +1,35 @@
 import { ModalBackdrop } from "@/lib/components/Modal/ModalBackdrop";
 import {
-  type ForwardedRef,
-  forwardRef,
-  type ReactNode,
-  RefObject,
-  useEffect,
-  useState,
-} from "react";
+  useModal,
+  type UseModalOptions,
+} from "@/lib/components/Modal/useModal";
+import { forwardRef, type ReactNode, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { ModalProvider } from "./ModalProvider";
 
-interface ModalProps {
-  isOpen: boolean;
-  handleOpenChange: (open: boolean) => void;
-  isDismissable?: boolean;
-  isKeyboardDismissDisabled?: boolean;
+interface ModalProps extends UseModalOptions {
   children: ReactNode;
-  dialogRef?: RefObject<HTMLDivElement>;
-  overlayRef?: RefObject<HTMLDivElement>;
-  closeButtonRef?: RefObject<HTMLButtonElement>;
 }
 
 export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
-  (
-    {
-      isOpen,
-      handleOpenChange,
-      isDismissable = true,
-      isKeyboardDismissDisabled = false,
-      children,
-      dialogRef,
-      overlayRef,
-      closeButtonRef,
-    },
-    ref: ForwardedRef<HTMLDivElement>
-  ) => {
-    const [renderModal, setRenderModal] = useState(isOpen);
+  (props, ref) => {
+    const { children, ...otherProps } = props;
+    const context = useModal({ ...otherProps, ref });
+    const [renderModal, setRenderModal] = useState(context.isOpen);
 
     // Animation exit timing
     useEffect(() => {
-      if (isOpen) {
+      if (context.isOpen) {
         setRenderModal(true);
       } else {
         const timeout = setTimeout(() => setRenderModal(false), 350);
         return () => clearTimeout(timeout);
       }
-    }, [isOpen]);
+    }, [context.isOpen]);
 
     // Prevent scroll when open
     useEffect(() => {
-      if (isOpen) {
+      if (context.isOpen) {
         document.body.style.overflow = "hidden";
       } else {
         document.body.style.overflow = "";
@@ -58,20 +38,12 @@ export const TempModal = forwardRef<HTMLDivElement, ModalProps>(
       return () => {
         document.body.style.overflow = "";
       };
-    }, [isOpen]);
+    }, [context.isOpen]);
 
     if (!renderModal) return null;
 
     return ReactDOM.createPortal(
-      <ModalProvider
-        isOpen={isOpen}
-        handleOpenChange={handleOpenChange}
-        isDismissable={isDismissable}
-        isKeyboardDismissDisabled={isKeyboardDismissDisabled}
-        dialogRef={dialogRef ?? (ref as any)}
-        overlayRef={overlayRef}
-        closeButtonRef={closeButtonRef}
-      >
+      <ModalProvider value={context}>
         <ModalBackdrop>{children}</ModalBackdrop>
       </ModalProvider>,
       document.body

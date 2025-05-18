@@ -1,4 +1,4 @@
-import { useModal } from "@/lib/components/Modal/ModalProvider";
+import { useModalContext } from "@/lib/components/Modal/ModalProvider";
 import { cn } from "@/lib/utils/shared";
 import { mergeRefs } from "@react-aria/utils";
 import { cva } from "class-variance-authority";
@@ -40,7 +40,7 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
     } = props;
 
     const { isOpen, dialogRef, closeButtonRef, handleKeyDown, handleClose } =
-      useModal();
+      useModalContext();
 
     // Focus on open
     useEffect(() => {

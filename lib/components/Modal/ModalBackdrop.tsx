@@ -1,4 +1,4 @@
-import { useModal } from "@/lib/components/Modal/ModalProvider";
+import { useModalContext } from "@/lib/components/Modal/ModalProvider";
 import { cn } from "@/lib/utils/shared";
 import { mergeRefs } from "@react-aria/utils";
 import { cva } from "class-variance-authority";
@@ -24,7 +24,7 @@ export interface ModalBackdropProps {
 export const ModalBackdrop = forwardRef<HTMLDivElement, ModalBackdropProps>(
   (props, ref) => {
     const { children, className, ...otherProps } = props;
-    const { isOpen, handleClickOutside, overlayRef } = useModal();
+    const { isOpen, handleClickOutside, overlayRef } = useModalContext();
 
     return (
       <div
