@@ -1,42 +1,45 @@
 import { cn, createRipple } from "@/lib/utils/shared";
+import { mergeRefs } from "@react-aria/utils";
 import { cva } from "class-variance-authority";
 import { ComponentProps, forwardRef, ReactNode, useRef } from "react";
 
 const buttonStyles = cva(
   [
     "w-full",
-    "font-medium",
     "focus:outline-none",
     "disabled:cursor-not-allowed",
     "transition-all",
     "duration-200",
+    "overflow-visible",
+    "border-[2px]",
   ],
   {
     variants: {
       color: {
-        primary: ["bg-stone-200", "text-gray-tint-600 border-stone-200"],
+        default: ["bg-neutral-300", "text-gray-tint-600", "border-stone-200"],
         secondary: [
           "bg-purple-tint-200",
           "text-gray-tint-600 border-purple-tint-200",
         ],
-        success: ["bg-green-regular", "text-stone-100 border-green-regular"],
+        success: ["bg-leaf-600", "text-stone-100 border-leaf-600"],
         danger: ["bg-orange-tint-300", "text-stone-100 border-orange-tint-300"],
       },
       variant: {
-        solid: "border-[2px]",
-        outline: "border-[2px] bg-transparent",
-        ghost:
-          "border-[2px] border-transparent bg-transparent transition-colors",
+        solid: "border-transparent",
+        flat: "",
+        outline: "bg-transparent",
+        ghost: "border-transparent bg-transparent transition-colors",
       },
       size: {
-        sm: "text-sm",
-        md: "px-4 py-2 text-base",
-        lg: "px-6 py-3 text-lg",
+        sm: "px-3.5 py-1.5 font-light text-xs",
+        md: "px-4 py-2 text-sm",
+        lg: "px-6 py-2.5 text-base",
       },
       radius: {
         full: "rounded-full",
         sm: "rounded-sm",
         md: "rounded-md",
+        lg: "rounded-lg",
       },
       isLoading: {
         true: "flex items-center justify-center gap-2.5 opacity-80",
@@ -56,9 +59,9 @@ const buttonStyles = cva(
       // outline states
       {
         variant: "outline",
-        color: "primary",
+        color: "default",
         className:
-          "font-medium text-gray-tint-400 border-gray-tint-400 hover:bg-stone-300 hover:border-stone-100 hover:text-gray-tint-500",
+          "text-gray-tint-400 border-gray-tint-400 hover:bg-stone-300 hover:border-stone-100 hover:text-gray-tint-500",
       },
       {
         variant: "outline",
@@ -70,7 +73,7 @@ const buttonStyles = cva(
         variant: "outline",
         color: "success",
         className:
-          "text-green-regular border-green-regular hover:bg-green-regular hover:text-stone-100",
+          "text-leaf-600 border-leaf-600 hover:bg-leaf-600 hover:text-stone-100",
       },
       {
         variant: "outline",
@@ -82,7 +85,7 @@ const buttonStyles = cva(
       // ghost states
       {
         variant: "ghost",
-        color: "primary",
+        color: "default",
         className:
           "text-gray-tint-400 hover:bg-stone-300 hover:border-stone-200 hover:text-gray-tint-500",
       },
@@ -95,8 +98,7 @@ const buttonStyles = cva(
       {
         variant: "ghost",
         color: "success",
-        className:
-          "text-green-regular hover:bg-green-regular hover:text-stone-100",
+        className: "text-leaf-600 hover:bg-leaf-600 hover:text-stone-100",
       },
       {
         variant: "ghost",
@@ -107,20 +109,20 @@ const buttonStyles = cva(
     ],
     defaultVariants: {
       variant: "solid",
-      size: "sm",
-      color: "secondary",
-      radius: "md",
+      size: "md",
+      color: "default",
+      radius: "lg",
       isLoading: false,
     },
   }
 );
 
 interface ButtonProps extends ComponentProps<"button"> {
-  color?: "primary" | "secondary" | "success" | "danger";
+  color?: "default" | "secondary" | "success" | "danger";
   isLoading?: boolean;
   icon?: ReactNode;
   size?: "sm" | "md" | "lg";
-  variant?: "solid" | "outline" | "ghost";
+  variant?: "solid" | "outline" | "flat" | "ghost";
   radius?: "full" | "sm" | "md";
 }
 
@@ -144,11 +146,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <button
-        ref={(node) => {
-          buttonRef.current = node;
-          if (typeof ref === "function") ref(node);
-          else if (ref) ref.current = node;
-        }}
+        ref={mergeRefs(buttonRef, ref)}
         disabled={isLoading}
         className={cn(
           "relative overflow-hidden",
@@ -163,7 +161,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onClick={(e) => {
           setTimeout(() => {
             props.onClick?.(e);
-          }, 100);
+          }, 50);
         }}
         {...props}
       >

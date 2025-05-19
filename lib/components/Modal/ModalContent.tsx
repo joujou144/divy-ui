@@ -17,7 +17,7 @@ const modalStyles = cva(
       },
     },
     defaultVariants: {
-      size: "xs",
+      size: "sm",
     },
   }
 );

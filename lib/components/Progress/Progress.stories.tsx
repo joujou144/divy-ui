@@ -24,7 +24,7 @@ export const SuccessMonoSm: Story = {
 
 export const SuccessGradientMd: Story = {
   args: {
-    value: 80,
+    value: 90,
     className: "w-[500px]",
     color: "success",
     colorVariant: "gradient",
