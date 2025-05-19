@@ -21,7 +21,10 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     ref
   ) => {
     const icon = customIcon ?? (
-      <LinkIcon className="transition-all duration-200 group-hover:rotate-[360deg]" />
+      <LinkIcon
+        data-testid="link-icon"
+        className="transition-all duration-200 group-hover:rotate-[360deg]"
+      />
     );
 
     return (
