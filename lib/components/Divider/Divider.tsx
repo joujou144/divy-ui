@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils/shared";
+import { mergeRefs } from "@react-aria/utils";
 import { cva } from "class-variance-authority";
-import { ComponentProps, forwardRef } from "react";
+import { ComponentProps, forwardRef, useRef } from "react";
 
 const dividerStyles = cva("shrink-0 bg-stone-300", {
   variants: {
@@ -20,9 +21,11 @@ interface DividerProps extends ComponentProps<"div"> {
 
 export const Divider = forwardRef<HTMLDivElement, DividerProps>(
   ({ orientation = "horizontal", className, ...props }, ref) => {
+    const localRef = useRef<HTMLDivElement | null>(null);
+
     return (
       <div
-        ref={ref}
+        ref={mergeRefs(localRef, ref)}
         role="separator"
         aria-orientation={orientation}
         className={cn(dividerStyles({ orientation }), className)}
