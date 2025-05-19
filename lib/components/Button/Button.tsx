@@ -1,4 +1,4 @@
-import { buttonStyles } from "@/lib/components/Button/ButtonStyles";
+import { buttonStyles } from "@/lib/components/Button";
 import { SpinnerIcon } from "@/lib/components/icons";
 import { cn, createRipple } from "@/lib/utils/shared";
 import { mergeRefs } from "@react-aria/utils";
