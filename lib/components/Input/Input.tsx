@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils/shared";
+import { mergeRefs } from "@react-aria/utils";
 import { cva } from "class-variance-authority";
-import { ComponentProps, forwardRef } from "react";
+import { ComponentProps, forwardRef, useRef } from "react";
 
 const inputStyles = cva(
   [
@@ -64,10 +65,12 @@ interface InputProps extends ComponentProps<"input"> {
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, label, radius, variant, ...props }, ref) => {
+    const localRef = useRef<HTMLInputElement | null>(null);
+
     return (
       <div className="relative flex flex-col items-start">
         <input
-          ref={ref}
+          ref={mergeRefs(localRef, ref)}
           className={cn(inputStyles({ variant, radius }), className)}
           placeholder=" " // Empty placeholder to trigger :not(:placeholder-shown)
           {...props}

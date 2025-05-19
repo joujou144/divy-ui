@@ -1,6 +1,7 @@
 import { LinkIcon } from "@/lib/components/icons";
 import { cn } from "@/lib/utils/shared";
-import { ComponentProps, forwardRef, ReactNode } from "react";
+import { mergeRefs } from "@react-aria/utils";
+import { ComponentProps, forwardRef, ReactNode, useRef } from "react";
 
 interface LinkProps extends ComponentProps<"a"> {
   isExternal?: boolean;
@@ -20,6 +21,8 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     },
     ref
   ) => {
+    const localRef = useRef<HTMLAnchorElement | null>(null);
+
     const icon = customIcon ?? (
       <LinkIcon
         data-testid="link-icon"
@@ -29,7 +32,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
 
     return (
       <a
-        ref={ref}
+        ref={mergeRefs(localRef, ref)}
         href={href}
         target={isExternal ? "_blank" : undefined}
         rel={isExternal ? "noopener noreferrer" : undefined}
