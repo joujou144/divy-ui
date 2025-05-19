@@ -19,7 +19,7 @@ const buttonStyles = cva(
   {
     variants: {
       color: {
-        default: ["bg-neutral-300 text-gray-800"],
+        default: ["bg-neutral-300", "text-gray-800"],
         secondary: ["bg-indigo-600", "text-stone-100"],
         success: ["bg-leaf-550", "text-gray-800"],
         danger: ["bg-rose-500", "text-stone-100"],
@@ -141,7 +141,7 @@ interface ButtonProps extends ComponentProps<"button"> {
   icon?: ReactNode;
   size?: "sm" | "md" | "lg";
   variant?: "solid" | "outline" | "light" | "ghost";
-  radius?: "full" | "sm" | "md";
+  radius?: "full" | "sm" | "md" | "lg";
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(

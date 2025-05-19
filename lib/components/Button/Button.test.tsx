@@ -10,22 +10,31 @@ vi.mock("@/lib/utils", () => ({
 
 describe(`Component: ${Button.name}`, () => {
   // default props
-  it("should render with default props", () => {
+  it("renders with default props", () => {
     const { container } = render(<Button>Test Button</Button>);
 
-    expect(container.firstChild).toMatchInlineSnapshot(`
-      <button
-        class="w-full font-medium focus:outline-none disabled:cursor-not-allowed transition-all duration-200 bg-purple-tint-200 text-gray-tint-600 border-none px-4 py-2 text-sm rounded-md hover:bg-opacity-80"
-      >
-        Test Button
-      </button>
-    `);
+    expect(container.firstChild).toHaveClass(
+      "w-full",
+      "focus:outline-none",
+      "disabled:cursor-not-allowed",
+      "transition-all",
+      "duration-200",
+      "border-[2px]",
+      "hover:border-transparent",
+      "bg-neutral-300",
+      "text-gray-800",
+      "border-transparent",
+      "px-4",
+      "py-2",
+      "text-sm",
+      "rounded-lg"
+    );
     expect(screen.getByText("Test Button")).toBeInTheDocument();
   });
 
   // color variants
   it("renders different color variants correctly", () => {
-    const colors = ["primary", "secondary", "success", "danger"] as const;
+    const colors = ["default", "secondary", "success", "danger"] as const;
 
     colors.forEach((color) => {
       const { container } = render(
@@ -34,13 +43,13 @@ describe(`Component: ${Button.name}`, () => {
 
       // check if appropriate color classes are applied
       expect(container.firstChild).toHaveClass(
-        color === "primary"
-          ? "bg-stone-200"
+        color === "default"
+          ? "bg-neutral-300 text-gray-800"
           : color === "secondary"
-          ? "bg-purple-tint-200"
+          ? "bg-indigo-600 text-stone-100"
           : color === "success"
-          ? "bg-green-regular"
-          : "bg-orange-tint-300"
+          ? "bg-leaf-550 text-gray-800"
+          : "bg-rose-500 text-stone-100"
       );
     });
   });
@@ -55,17 +64,17 @@ describe(`Component: ${Button.name}`, () => {
       // check if appropriate size classes are applied
       expect(container.firstChild).toHaveClass(
         size === "sm"
-          ? "px-4 py-2 text-sm"
+          ? "px-3.5 py-1.5 font-light text-xs"
           : size === "md"
-          ? "px-4 py-2 text-base"
-          : "px-6 py-3 text-lg"
+          ? "px-4 py-2 text-sm"
+          : "px-6 py-2.5 text-base"
       );
     });
   });
 
   // style variants
   it("renders different style variants correctly", () => {
-    const variants = ["solid", "outline", "ghost"] as const;
+    const variants = ["solid", "outline", "light", "ghost"] as const;
 
     variants.forEach((variant) => {
       const { container } = render(
@@ -75,17 +84,19 @@ describe(`Component: ${Button.name}`, () => {
       // check if appropriate variant classes are applied
       expect(container.firstChild).toHaveClass(
         variant === "solid"
-          ? "border-none"
+          ? "border-transparent"
+          : variant === "light"
+          ? "border-transparent hover:opacity-80"
           : variant === "outline"
-          ? "border-[2px]"
-          : "transition-colors"
+          ? "bg-transparent"
+          : "border-transparent bg-transparent"
       );
     });
   });
 
   // radius variants
   it("renders different radius options correctly", () => {
-    const radiusOptions = ["full", "sm", "md"] as const;
+    const radiusOptions = ["full", "sm", "md", "lg"] as const;
 
     radiusOptions.forEach((radius) => {
       const { container } = render(
@@ -98,7 +109,9 @@ describe(`Component: ${Button.name}`, () => {
           ? "rounded-full"
           : radius === "sm"
           ? "rounded-sm"
-          : "rounded-md"
+          : radius === "md"
+          ? "rounded-md"
+          : "rounded-lg"
       );
     });
   });
