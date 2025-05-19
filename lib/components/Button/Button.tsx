@@ -20,8 +20,8 @@ const buttonStyles = cva(
     variants: {
       color: {
         default: ["bg-neutral-300 text-gray-800"],
-        secondary: ["bg-azure-600", "text-stone-100"],
-        success: ["bg-leaf-600", "text-gray-800"],
+        secondary: ["bg-indigo-600", "text-stone-100"],
+        success: ["bg-leaf-550", "text-gray-800"],
         danger: ["bg-rose-500", "text-stone-100"],
       },
       variant: {
@@ -56,6 +56,7 @@ const buttonStyles = cva(
         variant: "solid",
         className: "hover:bg-opacity-80 hover:border-transparent",
       },
+
       // light states
       {
         variant: "light",
@@ -65,7 +66,7 @@ const buttonStyles = cva(
       {
         variant: "light",
         color: "secondary",
-        className: "bg-blue-200 text-azure-700",
+        className: "bg-indigo-200 text-indigo-900",
       },
       {
         variant: "light",
@@ -87,13 +88,13 @@ const buttonStyles = cva(
         variant: "outline",
         color: "secondary",
         className:
-          "text-azure-600 border-azure-600 hover:bg-azure-600 hover:text-stone-100",
+          "text-indigo-600 border-indigo-600 hover:bg-indigo-600 hover:text-stone-100",
       },
       {
         variant: "outline",
         color: "success",
         className:
-          "text-leaf-600 border-leaf-600 hover:bg-leaf-600 hover:text-gray-800",
+          "text-leaf-600 border-leaf-600 hover:bg-leaf-550 hover:text-gray-800",
       },
       {
         variant: "outline",
@@ -111,7 +112,7 @@ const buttonStyles = cva(
       {
         variant: "ghost",
         color: "secondary",
-        className: "text-azure-600 hover:bg-azure-600 hover:text-stone-100",
+        className: "text-indigo-800 hover:bg-indigo-600 hover:text-stone-100",
       },
       {
         variant: "ghost",
