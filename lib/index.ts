@@ -1,6 +1,6 @@
 import "./tailwind.css";
 
-export * from "./components/Button/Button";
+export * from "./components/Button";
 export * from "./components/Card/Card";
 export * from "./components/Divider/Divider";
 export * from "./components/icons";
