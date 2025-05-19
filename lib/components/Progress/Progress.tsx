@@ -21,8 +21,8 @@ const progressStyles = cva(
         md: "h-3",
       },
       color: {
-        success: "bg-leaf-600",
-        loading: "bg-azure-600",
+        success: "bg-leaf-550",
+        loading: "bg-indigo-600",
       },
     },
     defaultVariants: {
@@ -35,16 +35,16 @@ const progressStyles = cva(
 const getGradientColor = (value: number, color: "success" | "loading") => {
   const palette = {
     success: [
-      "bg-leaf-400", // ≤30%
-      "bg-leaf-500", // 31–50%
-      "bg-leaf-550", // 51–80%
-      "bg-leaf-600", // >90%
+      "bg-leaf-300", // ≤30%
+      "bg-leaf-400", // 31–50%
+      "bg-leaf-500", // 51–80%
+      "bg-leaf-550", // >90%
     ],
     loading: [
-      "bg-azure-300", // ≤30%
-      "bg-azure-400", // 31–50%
-      "bg-azure-500", // 51–80%
-      "bg-azure-600", // >90%
+      "bg-indigo-300", // ≤30%
+      "bg-azure-500", // 31–50%
+      "bg-azure-700", // 51–80%
+      "bg-indigo-600", // >90%
     ],
   };
 
