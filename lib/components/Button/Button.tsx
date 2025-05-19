@@ -8,27 +8,27 @@ const buttonStyles = cva(
     "w-full",
     "focus:outline-none",
     "disabled:cursor-not-allowed",
+    "disabled:opacity-70",
+    "disabled:text-opacity-80",
     "transition-all",
     "duration-200",
     "overflow-visible",
     "border-[2px]",
+    "hover:border-transparent",
   ],
   {
     variants: {
       color: {
-        default: ["bg-neutral-300", "text-gray-tint-600", "border-stone-200"],
-        secondary: [
-          "bg-purple-tint-200",
-          "text-gray-tint-600 border-purple-tint-200",
-        ],
-        success: ["bg-leaf-600", "text-stone-100 border-leaf-600"],
-        danger: ["bg-orange-tint-300", "text-stone-100 border-orange-tint-300"],
+        default: ["bg-neutral-300 text-gray-800"],
+        secondary: ["bg-azure-600", "text-stone-100"],
+        success: ["bg-leaf-600", "text-gray-800"],
+        danger: ["bg-rose-500", "text-stone-100"],
       },
       variant: {
         solid: "border-transparent",
-        flat: "",
+        light: "border-transparent  hover:opacity-80",
         outline: "bg-transparent",
-        ghost: "border-transparent bg-transparent transition-colors",
+        ghost: "border-transparent bg-transparent",
       },
       size: {
         sm: "px-3.5 py-1.5 font-light text-xs",
@@ -56,44 +56,62 @@ const buttonStyles = cva(
         variant: "solid",
         className: "hover:bg-opacity-80 hover:border-transparent",
       },
+      // light states
+      {
+        variant: "light",
+        color: "default",
+        className: "bg-neutral-200",
+      },
+      {
+        variant: "light",
+        color: "secondary",
+        className: "bg-blue-200 text-azure-700",
+      },
+      {
+        variant: "light",
+        color: "success",
+        className: "bg-leaf-250 text-green-900",
+      },
+      {
+        variant: "light",
+        color: "danger",
+        className: "bg-brick-200 text-brick-900",
+      },
       // outline states
       {
         variant: "outline",
         color: "default",
-        className:
-          "text-gray-tint-400 border-gray-tint-400 hover:bg-stone-300 hover:border-stone-100 hover:text-gray-tint-500",
+        className: "border-stone-400 text-gray-600 hover:bg-neutral-300",
       },
       {
         variant: "outline",
         color: "secondary",
         className:
-          "text-purple-300 border-purple-tint-200 hover:bg-purple-tint-200 hover:text-gray-tint-600",
+          "text-azure-600 border-azure-600 hover:bg-azure-600 hover:text-stone-100",
       },
       {
         variant: "outline",
         color: "success",
         className:
-          "text-leaf-600 border-leaf-600 hover:bg-leaf-600 hover:text-stone-100",
+          "text-leaf-600 border-leaf-600 hover:bg-leaf-600 hover:text-gray-800",
       },
       {
         variant: "outline",
         color: "danger",
         className:
-          "text-orange-tint-300 border-orange-tint-300 hover:bg-orange-tint-300 hover:text-stone-100",
+          "border-rose-500 text-rose-600 hover:bg-rose-500 hover:text-stone-100",
       },
 
       // ghost states
       {
         variant: "ghost",
         color: "default",
-        className:
-          "text-gray-tint-400 hover:bg-stone-300 hover:border-stone-200 hover:text-gray-tint-500",
+        className: "hover:bg-neutral-300",
       },
       {
         variant: "ghost",
         color: "secondary",
-        className:
-          "text-purple-300 hover:bg-purple-tint-200 hover:text-gray-tint-600",
+        className: "text-azure-600 hover:bg-azure-600 hover:text-stone-100",
       },
       {
         variant: "ghost",
@@ -103,8 +121,7 @@ const buttonStyles = cva(
       {
         variant: "ghost",
         color: "danger",
-        className:
-          "font-medium text-orange-tint-300 hover:bg-orange-tint-300 hover:text-stone-100",
+        className: "text-rose-600 hover:bg-rose-500 hover:text-stone-100",
       },
     ],
     defaultVariants: {
@@ -122,7 +139,7 @@ interface ButtonProps extends ComponentProps<"button"> {
   isLoading?: boolean;
   icon?: ReactNode;
   size?: "sm" | "md" | "lg";
-  variant?: "solid" | "outline" | "flat" | "ghost";
+  variant?: "solid" | "outline" | "light" | "ghost";
   radius?: "full" | "sm" | "md";
 }
 

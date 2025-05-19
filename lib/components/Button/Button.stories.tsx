@@ -29,9 +29,15 @@ const OutlineButtons = () => {
   return (
     <div className="flex items-center gap-4 justify-center">
       <Button variant="outline">outline</Button>
-      <Button variant="outline">outline</Button>
-      <Button variant="outline">outline</Button>
-      <Button variant="outline">outline</Button>
+      <Button variant="outline" color="secondary">
+        outline
+      </Button>
+      <Button variant="outline" color="success">
+        outline
+      </Button>
+      <Button variant="outline" color="danger">
+        outline
+      </Button>
     </div>
   );
 };
@@ -43,10 +49,16 @@ export const Outline: Story = {
 const VariantButtonsDefault = () => {
   return (
     <div className="flex gap-4 justify-between">
-      <Button>Solid</Button>
-      <Button variant="outline">Outline</Button>
-      <Button variant="flat">Flat</Button>
-      <Button variant="ghost">Ghost</Button>
+      <Button className="">Default</Button>
+      <Button className="" variant="outline">
+        Outline
+      </Button>
+      <Button className="" variant="light">
+        Light
+      </Button>
+      <Button className="" variant="ghost">
+        Ghost
+      </Button>
     </div>
   );
 };
@@ -62,8 +74,8 @@ const VariantButtonsSecondary = () => {
       <Button color="secondary" variant="outline">
         Outline
       </Button>
-      <Button color="secondary" variant="flat">
-        Flat
+      <Button color="secondary" variant="light">
+        Light
       </Button>
       <Button color="secondary" variant="ghost">
         Ghost
@@ -83,8 +95,8 @@ const VariantButtonsSuccess = () => {
       <Button color="success" variant="outline">
         Outline
       </Button>
-      <Button color="success" variant="flat">
-        Flat
+      <Button color="success" variant="light">
+        Light
       </Button>
       <Button color="success" variant="ghost">
         Ghost
@@ -104,8 +116,8 @@ const VariantButtonsDanger = () => {
       <Button color="danger" variant="outline">
         Outline
       </Button>
-      <Button color="danger" variant="flat">
-        Flat
+      <Button color="danger" variant="light">
+        Light
       </Button>
       <Button color="danger" variant="ghost">
         Ghost
