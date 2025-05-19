@@ -1,6 +1,6 @@
 {
   "name": "divy-ui",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "type": "module",
   "types": "./dist/index.d.ts",
   "main": "./dist/divy-ui.umd.cjs",
