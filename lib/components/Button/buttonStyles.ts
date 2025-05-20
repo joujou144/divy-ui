@@ -66,12 +66,12 @@ export const buttonStyles = cva(
       {
         variant: "light",
         color: "success",
-        className: "bg-leaf-100 text-emerald-500 hover:bg-green-100",
+        className: "bg-green-200 text-emerald-600 hover:bg-emerald-200",
       },
       {
         variant: "light",
         color: "danger",
-        className: "bg-brick-200 text-rose-600 hover:bg-brick-200",
+        className: "bg-brick-200 text-rose-600 hover:bg-rose-200",
       },
       // outline states
       {
