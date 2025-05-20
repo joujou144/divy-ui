@@ -4,9 +4,13 @@ import { describe, vi } from "vitest";
 import { Button } from "./Button";
 
 // Mock the cn utility to have class names in tests
-vi.mock("@/lib/utils", () => ({
-  cn: (...inputs: string[]) => inputs.filter(Boolean).join(" "),
-}));
+vi.mock("@/lib/utils/shared", async () => {
+  const actual = await vi.importActual<any>("@/lib/utils/shared");
+  return {
+    ...actual,
+    cn: (...inputs: string[]) => inputs.filter(Boolean).join(" "),
+  };
+});
 
 describe(`Component: ${Button.name}`, () => {
   // default props
@@ -14,16 +18,16 @@ describe(`Component: ${Button.name}`, () => {
     const { container } = render(<Button>Test Button</Button>);
 
     expect(container.firstChild).toHaveClass(
-      "w-full",
+      "box-border",
       "focus:outline-none",
       "disabled:cursor-not-allowed",
+      "disabled:opacity-70",
+      "disabled:text-opacity-80",
       "transition-all",
       "duration-200",
-      "border-[2px]",
-      "hover:border-transparent",
-      "bg-neutral-300",
-      "text-gray-800",
-      "border-transparent",
+      "font-medium",
+      "bg-gray-300",
+      "text-gray-700",
       "px-4",
       "py-2",
       "text-sm",
@@ -44,12 +48,12 @@ describe(`Component: ${Button.name}`, () => {
       // check if appropriate color classes are applied
       expect(container.firstChild).toHaveClass(
         color === "default"
-          ? "bg-neutral-300 text-gray-800"
+          ? "bg-gray-300 text-gray-700"
           : color === "secondary"
-          ? "bg-indigo-600 text-stone-100"
+          ? "bg-violet-500 text-white"
           : color === "success"
-          ? "bg-leaf-550 text-gray-800"
-          : "bg-rose-500 text-stone-100"
+          ? "bg-leaf-600 text-white"
+          : "bg-brick-500 text-white"
       );
     });
   });
@@ -64,7 +68,7 @@ describe(`Component: ${Button.name}`, () => {
       // check if appropriate size classes are applied
       expect(container.firstChild).toHaveClass(
         size === "sm"
-          ? "px-3.5 py-1.5 font-light text-xs"
+          ? "px-3.5 py-2 text-xs"
           : size === "md"
           ? "px-4 py-2 text-sm"
           : "px-6 py-2.5 text-base"
@@ -84,12 +88,12 @@ describe(`Component: ${Button.name}`, () => {
       // check if appropriate variant classes are applied
       expect(container.firstChild).toHaveClass(
         variant === "solid"
-          ? "border-transparent"
+          ? "ring-none"
           : variant === "light"
-          ? "border-transparent hover:opacity-80"
+          ? "ring-none"
           : variant === "outline"
           ? "bg-transparent"
-          : "border-transparent bg-transparent"
+          : "bg-transparent"
       );
     });
   });
@@ -108,10 +112,10 @@ describe(`Component: ${Button.name}`, () => {
         radius === "full"
           ? "rounded-full"
           : radius === "sm"
-          ? "rounded-sm"
-          : radius === "md"
           ? "rounded-md"
-          : "rounded-lg"
+          : radius === "md"
+          ? "rounded-lg"
+          : "rounded-xl"
       );
     });
   });

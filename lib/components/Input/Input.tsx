@@ -25,9 +25,9 @@ const inputStyles = cva(
   {
     variants: {
       variant: {
-        flat: "bg-gray-100 hover:bg-gray-tint-200 hover:focus-within:bg-gray-100 focus:border-transparent hover:disabled:bg-gray-100",
+        flat: "bg-gray-100 hover:bg-gray-200 hover:focus-within:bg-gray-100 focus:border-transparent hover:disabled:bg-gray-100",
         bordered:
-          "bg-transparent ring-2 ring-gray-tint-200 focus-within:ring-gray-tint-500 hover:ring-gray-tint-400 hover:focus-within:ring-gray-tint-500 hover:disabled:ring-gray-tint-200 ",
+          "bg-transparent ring-2 ring-gray-200 focus-within:ring-gray-500 hover:ring-gray-400 hover:focus-within:ring-gray-500 hover:disabled:ring-gray-200 ",
       },
       radius: {
         sm: "rounded-md",

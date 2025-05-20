@@ -20,8 +20,8 @@ export const buttonStyles = cva(
         danger: ["bg-brick-500", "text-white"],
       },
       variant: {
-        solid: "",
-        light: "",
+        solid: "ring-none",
+        light: "ring-none",
         outline: "bg-transparent",
         ghost: "bg-transparent",
       },

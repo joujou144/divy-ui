@@ -1,4 +1,5 @@
-import { cn } from "@/lib/utils/shared";
+import { cn, useDOMRef } from "@/lib/utils/shared";
+import { mergeRefs } from "@react-aria/utils";
 import { cva } from "class-variance-authority";
 import { ComponentProps, forwardRef, KeyboardEvent, ReactNode } from "react";
 
@@ -57,22 +58,23 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     },
     ref
   ) => {
+    const localRef = useDOMRef<HTMLDivElement>();
+
     const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
       if (isClickable && (e.key === "Enter" || e.key === " ")) {
         e.preventDefault();
-        onClick?.(e as any);
+        localRef.current?.click();
       }
     };
 
     return (
       <div
-        ref={ref}
-        role={isClickable ? "button" : "group"}
+        ref={mergeRefs(localRef, ref)}
+        role={isClickable ? "button" : "div"}
         tabIndex={isClickable ? 0 : undefined}
-        aria-pressed={isClickable ? false : undefined}
         aria-label={ariaLabel}
         onKeyDown={handleKeyDown}
-        onClick={onClick}
+        onClick={isClickable ? onClick : undefined}
         className={cn(
           cardStyles({ radius, isHoverable, isClickable, isFooterBlurred }),
 

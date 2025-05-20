@@ -9,7 +9,7 @@ vi.mock("@/lib/utils", () => ({
 
 describe(`Component ${Input.name}`, () => {
   // default props
-  it("should rednder default props correctly", () => {
+  it("should render default props correctly", () => {
     const { container } = render(<Input type="text" label="Username" />);
     const input = container.querySelector("input");
 
@@ -47,8 +47,8 @@ describe(`Component ${Input.name}`, () => {
       expect(input).toBeInTheDocument();
       expect(input).toHaveClass(
         variant === "flat"
-          ? "bg-gray-100 hover:bg-gray-tint-200 hover:focus-within:bg-gray-100 focus:border-transparent hover:disabled:bg-gray-100"
-          : "bg-transparent ring-2 ring-gray-tint-200 focus-within:ring-gray-tint-500 hover:ring-gray-tint-400 hover:focus-within:ring-gray-tint-500 hover:disabled:ring-gray-tint-200 "
+          ? "bg-gray-100 hover:bg-gray-200 hover:focus-within:bg-gray-100 focus:border-transparent hover:disabled:bg-gray-100"
+          : "bg-transparent ring-2 ring-gray-200 focus-within:ring-gray-500 hover:ring-gray-400 hover:focus-within:ring-gray-500 hover:disabled:ring-gray-200 "
       );
     });
   });
