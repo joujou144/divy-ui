@@ -1,8 +1,8 @@
 import { buttonStyles } from "@/lib/components/Button";
 import { SpinnerIcon } from "@/lib/components/icons";
-import { cn, createRipple } from "@/lib/utils/shared";
+import { cn, createRipple, useDOMRef } from "@/lib/utils/shared";
 import { mergeRefs } from "@react-aria/utils";
-import { ComponentProps, forwardRef, ReactNode, useRef } from "react";
+import { ComponentProps, forwardRef, ReactNode } from "react";
 
 interface ButtonProps extends ComponentProps<"button"> {
   color?: "default" | "secondary" | "success" | "danger";
@@ -29,7 +29,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const withIcon = Boolean(icon);
-    const buttonRef = useRef<HTMLButtonElement | null>(null);
+    const buttonRef = useDOMRef<HTMLButtonElement>();
 
     return (
       <button

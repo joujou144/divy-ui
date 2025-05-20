@@ -13,7 +13,7 @@ type Story = StoryObj<typeof Button>;
 
 const SolidButtons = () => {
   return (
-    <div className="flex items-center gap-4 justify-center">
+    <div className="flex items-center gap-4 justify-between">
       <Button size="sm">Small</Button>
       <Button size="md">Medium</Button>
       <Button size="lg">Large</Button>
@@ -27,16 +27,16 @@ export const Solid: Story = {
 
 const OutlineButtons = () => {
   return (
-    <div className="flex items-center gap-4 justify-center">
-      <Button variant="outline">outline</Button>
+    <div className="flex gap-4 justify-between">
+      <Button variant="outline">Default</Button>
       <Button variant="outline" color="secondary">
-        outline
+        Secondary
       </Button>
       <Button variant="outline" color="success">
-        outline
+        Success
       </Button>
       <Button variant="outline" color="danger">
-        outline
+        Error
       </Button>
     </div>
   );
@@ -49,16 +49,10 @@ export const Outline: Story = {
 const VariantButtonsDefault = () => {
   return (
     <div className="flex gap-4 justify-between">
-      <Button className="">Default</Button>
-      <Button className="" variant="outline">
-        Outline
-      </Button>
-      <Button className="" variant="light">
-        Light
-      </Button>
-      <Button className="" variant="ghost">
-        Ghost
-      </Button>
+      <Button variant="solid">Solid</Button>
+      <Button variant="outline">Outline</Button>
+      <Button variant="light">Light</Button>
+      <Button variant="ghost">Ghost</Button>
     </div>
   );
 };
@@ -70,15 +64,15 @@ export const Variant_Default: Story = {
 const VariantButtonsSecondary = () => {
   return (
     <div className="flex gap-4 justify-between">
-      <Button color="secondary">Solid</Button>
+      <Button color="secondary">Secondary</Button>
       <Button color="secondary" variant="outline">
-        Outline
+        Secondary
       </Button>
       <Button color="secondary" variant="light">
-        Light
+        Secondary
       </Button>
       <Button color="secondary" variant="ghost">
-        Ghost
+        Secondary
       </Button>
     </div>
   );
@@ -91,15 +85,15 @@ export const Variant_Secondary: Story = {
 const VariantButtonsSuccess = () => {
   return (
     <div className="flex gap-4 justify-between">
-      <Button color="success">Solid</Button>
+      <Button color="success">Success</Button>
       <Button color="success" variant="outline">
-        Outline
+        Success
       </Button>
       <Button color="success" variant="light">
-        Light
+        Success
       </Button>
       <Button color="success" variant="ghost">
-        Ghost
+        Success
       </Button>
     </div>
   );
@@ -112,15 +106,15 @@ export const Variant_Success: Story = {
 const VariantButtonsDanger = () => {
   return (
     <div className="flex gap-4 justify-between">
-      <Button color="danger">Solid</Button>
+      <Button color="danger">Danger</Button>
       <Button color="danger" variant="outline">
-        Outline
+        Danger
       </Button>
       <Button color="danger" variant="light">
-        Light
+        Danger
       </Button>
       <Button color="danger" variant="ghost">
-        Ghost
+        Danger
       </Button>
     </div>
   );

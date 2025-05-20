@@ -4,8 +4,8 @@ export default {
     // reference the lib only
     "./lib/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: "class",
   theme: {
+    darkMode: "class",
     extend: {
       fontSize: {
         default: "0.95rem",
@@ -34,7 +34,6 @@ export default {
           300: "#5cec8b",
           350: "#62e693",
           400: "#00e764",
-          // 500: "#2bd669",
           500: "#1ec956",
           550: "#0fd863",
           600: "#00c14f",
@@ -42,9 +41,15 @@ export default {
           800: "#057637",
         },
         brick: {
-          200: "#fed6d8",
+          50: "#fdf4f3",
+          100: "#fbdeda",
+          200: "#fad3ce",
+          300: "#fca5aa",
+          400: "#ef887a",
+          500: "#e36250",
+          600: "#cf4633",
+          700: "#ae3727",
           900: "#79153a",
-          950: "#17030b",
         },
       },
       animation: {

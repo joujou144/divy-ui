@@ -5,7 +5,7 @@ import { forwardRef } from "react";
 
 export interface ProgressProps extends ComponentProps<"div"> {
   color: "success" | "loading";
-  colorVariant?: "mono" | "gradient";
+  colorVariant?: "solid" | "gradient";
   size?: "sm" | "md";
   showValueLabel?: boolean;
   value: number;
@@ -59,7 +59,7 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
     {
       className,
       color = "loading",
-      colorVariant = "mono",
+      colorVariant = "solid",
       size = "md",
       showValueLabel = false,
       value,
@@ -69,7 +69,7 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
     ref
   ) => {
     const fillColor =
-      colorVariant === "mono"
+      colorVariant === "solid"
         ? progressStyles({ size, color })
         : cn(progressStyles({ size }), getGradientColor(value, color));
 
