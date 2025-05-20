@@ -21,7 +21,7 @@ const progressStyles = cva(
         md: "h-3",
       },
       color: {
-        success: "bg-leaf-550",
+        success: "bg-emerald-500",
         loading: "bg-indigo-600",
       },
     },
@@ -35,10 +35,10 @@ const progressStyles = cva(
 const getGradientColor = (value: number, color: "success" | "loading") => {
   const palette = {
     success: [
-      "bg-leaf-300", // ≤30%
+      "bg-green-300", // ≤30%
       "bg-leaf-400", // 31–50%
       "bg-leaf-500", // 51–80%
-      "bg-leaf-550", // >90%
+      "bg-emerald-500", // >90%
     ],
     loading: [
       "bg-indigo-300", // ≤30%

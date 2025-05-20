@@ -14,9 +14,9 @@ export const buttonStyles = cva(
   {
     variants: {
       color: {
-        default: ["bg-gray-300", "text-gray-700"],
+        default: ["bg-gray-300", "text-gray-600"],
         secondary: ["bg-violet-500", "text-white"],
-        success: ["bg-leaf-600", "text-white"],
+        success: ["bg-emerald-500", "text-white"],
         danger: ["bg-brick-500", "text-white"],
       },
       variant: {
@@ -56,7 +56,7 @@ export const buttonStyles = cva(
       {
         variant: "light",
         color: "default",
-        className: "bg-slate-100 text-gray-700 hover:bg-slate-200",
+        className: "bg-gray-200 hover:bg-zinc-200",
       },
       {
         variant: "light",
@@ -66,7 +66,7 @@ export const buttonStyles = cva(
       {
         variant: "light",
         color: "success",
-        className: "bg-green-200 text-emerald-600 hover:bg-emerald-200",
+        className: "bg-emerald-100 text-emerald-500 hover:bg-emerald-200",
       },
       {
         variant: "light",
@@ -78,7 +78,7 @@ export const buttonStyles = cva(
         variant: "outline",
         color: "default",
         className:
-          "ring-1 hover:ring-2 ring-slate-300 hover:bg-slate-50 hover:ring-slate-400 text-gray-500",
+          "ring-1 hover:ring-2 ring-slate-300 hover:bg-zinc-100 hover:ring-slate-400 text-gray-500",
       },
       {
         variant: "outline",
@@ -103,7 +103,7 @@ export const buttonStyles = cva(
       {
         variant: "ghost",
         color: "default",
-        className: "hover:bg-slate-100",
+        className: "hover:bg-zinc-100",
       },
       {
         variant: "ghost",

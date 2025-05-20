@@ -48,11 +48,11 @@ describe(`Component: ${Button.name}`, () => {
       // check if appropriate color classes are applied
       expect(container.firstChild).toHaveClass(
         color === "default"
-          ? "bg-gray-300 text-gray-700"
+          ? "bg-gray-300 text-gray-600"
           : color === "secondary"
           ? "bg-violet-500 text-white"
           : color === "success"
-          ? "bg-leaf-600 text-white"
+          ? "bg-emerald-500 text-white"
           : "bg-brick-500 text-white"
       );
     });
