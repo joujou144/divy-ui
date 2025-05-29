@@ -1,6 +1,6 @@
 {
   "name": "divy-ui",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "types": "./dist/index.d.ts",
   "main": "./dist/divy-ui.umd.cjs",
@@ -11,7 +11,7 @@
       "import": "./dist/divy-ui.js",
       "require": "./dist/divy-ui.umd.cjs"
     },
-    "./divy-ui.css": "./dist/divy-ui.css"
+    "./divy-ui.css": "./divy-ui.css"
   },
   "files": [
     "dist",
