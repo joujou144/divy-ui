@@ -1,3 +1,6 @@
+@tailwind components;
+@tailwind utilities;
+
 .ripple {
   position: absolute;
   border-radius: 50%;
