@@ -31,7 +31,6 @@
     "coverage": "vitest run --coverage",
     "prebuild": "rm -rf dist",
     "build": "tsc -p tsconfig.build.json && vite build",
-    "postbuild": "cp dist/divy-ui.css ./divy-ui.css",
     "lint": "eslint .",
     "preview": "vite preview",
     "prepublish": "npm run build",
