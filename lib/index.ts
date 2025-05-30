@@ -1,4 +1,4 @@
-import "./globals.css";
+import "./tailwind.css";
 
 export * from "./components/Button";
 export * from "./components/Card/Card";
