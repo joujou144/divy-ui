@@ -14,7 +14,7 @@ npm install divy-ui
 1. Import the styles in your main application file:
 
 ```js
-import "divy-ui.css";
+import "divy-ui/style.css";
 ```
 
 2. Import and use components:
@@ -68,11 +68,22 @@ function App() {
 
 - Button
 - Input
+- Card
+- Divider
+- Image
+- Link
+- Modal
+- Progress bar
 
 ### Coming Soon
 
-- Card
+- Accordion
 - Radio
+- Sidebar
+- Tooltip
+- Badge
+- Spinner
+- Tabs
 
 ## Development
 
